@@ -26,6 +26,7 @@ gem "paperclip", "~> 2.4"
 gem 'will_paginate', '> 3.0'
 gem 'prawn'
 gem "jquery-fileupload-rails"
+
 gem 'pg'
 
 # To use ActiveModel has_secure_password
