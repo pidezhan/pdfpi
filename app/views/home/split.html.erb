@@ -1,0 +1,76 @@
+<h3> Split PDF </h3>
+<br>
+<script>
+
+$(document).ready(function(){
+	$('.row > .handle').hide();
+	$('#add_range10').remove();
+	$('#form_ranges > .row').hide();
+	$('#split_1').show();
+	<% (1..9).each do |n| %>
+		$('#add_range<%= n %>').click(function(){
+			$('#split_<%= n + 1 %>').show();
+			$(this).hide();
+		});
+	<% end %>
+});
+</script>
+<div id="split_upload">
+  <%= render @upload if @upload %>
+</div>
+<div class="clear"></div>
+
+
+<script id="template-upload" type="text/x-tmpl">
+{% if (o.error) { %}
+<div class="alert alert-error">
+  {%=o.name%} ({%=o.size_with_format%}): {%=o.error%} <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+{% } else { %}
+<div class="upload row">
+  <div class="span4"> {%=o.name%} ({%=o.size_with_format%}) </div>
+  <div class="span6 progress"><div class="bar" style="width: 0%;"></div></div>
+</div>
+{% } %}
+
+</script>
+
+<%= form_for Upload.new do |f| %>
+	<span class="btn btn-success fileinput-button">
+    <i class="icon-plus icon-white"></i>
+    <span>Select file...</span>
+    <%= f.file_field :upload, :accept => 'application/pdf' %>
+  </span>
+	<%= hidden_field_tag "job_id", session['split_job_id'] %>
+
+<% end %>
+<br><br>
+<div id="uploading"> </div>
+<br>
+
+<div>
+<%= form_tag deliver_split_url, :id => 'form_ranges' do -%>
+	<% (1..10).each do |n| %>
+	<div class="row" id="split_<%= n %>">
+		<div class="span1">Split <%= n %>: </div>
+		<div class="span2">
+		 From <%= number_field_tag "range#{n}_from", nil, :min => 1, :max => 999, :class => "input-mini" %> 
+		</div>
+		<div class="span2">
+		To <%= number_field_tag "range#{n}_to", nil, :in => 1...999, :class => "input-mini" %>
+		</div>
+		<div class="span2">
+			<button class="btn btn-small btn-primary" type="button" id="add_range<%= n %>">
+			  <i class="icon-plus icon-white"></i>
+			  <span>Add range</span>
+			</button>
+		</div>
+	</div>
+	<% end %>
+	<br>
+	<button type="submit" class="btn btn-large btn-primary start" id="start">
+	  <i class="icon-upload icon-white"></i>
+	  <span>Split</span>
+	</button>
+<% end -%>
+</div>

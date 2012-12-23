@@ -1,0 +1,13 @@
+<h3>Thank you for using pdfPi</h3>
+<p> The split file is available from the link below for 24 hours from <%= Time.now %>: </p>
+
+<div class="well">
+	<div>
+		<%= link_to "http://localhost:3000/" + @download_link, "/" + @download_link %>
+	</div>
+	<div> </div>
+</div>
+
+<br>
+
+<p><span class="label label-important">Important</span> Please do NOT refresh this page or click the Back button of the browser before taking down the link. Otherwise, the link to download the combined PDF will be lost. </p>

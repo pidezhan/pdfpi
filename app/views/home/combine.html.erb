@@ -1,0 +1,66 @@
+<h3> Combine PDFs </h3>
+<script>
+
+$(document).ready(function(){
+	$('#uploads').sortable({
+		axis: 'y',
+		dropOnEmpty: false,
+		opacity: 0.4,
+		scroll: true,
+		update: function(){
+			$.ajax({
+			type: 'post',
+			handle: '.handle',
+			cursor: 'crosshair',
+			items: 'div',
+			data: $('#uploads').sortable('serialize'),
+			dataType: 'script',
+			complete: function(request){
+				$('#uploads').effect('highlight');
+				},
+				url: '/home/sort'})
+		}
+	});
+});
+</script>
+
+<div id="uploads">
+  <%= render @uploads %>
+</div>
+<div class="clear"></div>
+
+<script id="template-upload" type="text/x-tmpl">
+{% if (o.error) { %}
+<div class="alert alert-error">
+  {%=o.name%} ({%=o.size_with_format%}): {%=o.error%} <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+{% } else { %}
+<div class="upload row">
+  <div class="span4"> {%=o.name%} ({%=o.size_with_format%}) </div>
+  <div class="span6 progress"><div class="bar" style="width: 0%;"></div></div>
+</div>
+{% } %}
+
+</script>
+
+<%= form_for Upload.new do |f| %>
+	<span class="btn btn-success fileinput-button">
+    <i class="icon-plus icon-white"></i>
+    <span>Add files...</span>
+    <%= f.file_field :upload, :multiple => true, :accept => 'application/pdf', :name => "upload[upload]" %>
+  </span>
+	<%= hidden_field_tag "job_id", session['combine_job_id'] %>
+
+<% end %>
+<br><br>
+<div id="uploading"> </div>
+<br>
+<div>
+<%= form_tag deliver_url do -%>
+<%= hidden_field_tag "job", 'combine' %>
+<button type="submit" class="btn btn-large btn-primary start" id="start">
+  <i class="icon-folder-close icon-white"></i>
+  <span>Combine into one PDF</span>
+</button>
+<% end -%>
+</div>

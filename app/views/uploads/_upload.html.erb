@@ -1,0 +1,7 @@
+
+<div class="row" style="margin-bottom: 5px" id="upload_<%= upload.id %>">
+
+	<div class="span1 handle">[ <i class="icon-move"></i> drag ] </div>
+	<div class="span6"><%= upload.upload_file_name %></div>
+	<div class="span4"><%= link_to raw("<i class='icon-trash icon-white'></i>"), upload, :method => "DELETE", :class => "btn btn-danger", :remote => true, :disable_with => "Deleting" %></div>
+</div>
