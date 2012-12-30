@@ -29,7 +29,7 @@ gem "jquery-fileupload-rails"
 
 gem 'pg'
 
-gem 'rubyzip'
+gem 'rubyzip', :require => 'zip/zip'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
