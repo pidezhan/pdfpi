@@ -137,16 +137,20 @@ class HomeController < ApplicationController
 	          pdf.start_new_page(:template => file_path, :template_page => n)
 	        end
 	        pdf.render_file(File.join(@download_folder, "split_#{n.to_s}.pdf"))
-	        input_filenames << "split_#{n.to_s}.pdf"
+	        input_filenames << File.join(@download_folder, "split_#{n.to_s}.pdf")
 	        n += 1
   	    end
   	    
-  	    @ranges = ranges
+  	    zipfile_name = @download_folder + "/" + download_file_name
   	    
   	    # generate zip file
-  	    require 'rubygems'
-
-        zipfile_name = @download_folder + "/" + download_file_name
+  	    
+  	    `zip -j #{zipfile_name} #{input_filenames.join(' ')}`
+=begin
+        require 'rubygems'
+        require 'zip/zip'
+        
+        
 
         Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
           input_filenames.each do |filename|
@@ -156,6 +160,7 @@ class HomeController < ApplicationController
             zipfile.add(filename, @download_folder + '/' + filename)
           end
         end
+=end
 
   	    # reset session
   	    Upload.where(:job_id => session['split_job_id']).delete_all
