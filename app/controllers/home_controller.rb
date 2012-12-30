@@ -145,7 +145,6 @@ class HomeController < ApplicationController
   	    
   	    # generate zip file
   	    require 'rubygems'
-        require 'zip/zip'
 
         zipfile_name = @download_folder + "/" + download_file_name
 
