@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :get_job_id
   helper_method :download_link_prefix
-  
+  helper_method :get_title
   
   def get_job_id
     o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten
@@ -16,5 +16,18 @@ class ApplicationController < ActionController::Base
     else
       "http://localhost:3000/"
     end
+  end
+  
+  def get_title
+    page_title = ""
+    site_title = "Combine PDF and split PDF online for free with pdfPi.com"
+    if controller_name == "home"
+      if action_name != "index"
+        page_title = action_name.titleize + " PDF files"
+      end
+    else
+      page_title = action_name.titleize
+    end
+    page_title.length > 0 ? page_title + " | " + site_title : site_title
   end
 end
