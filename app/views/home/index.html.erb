@@ -1,9 +1,23 @@
+<h2>Welcome to pdfPi!</h2>
+<br>
+  <p>pdfPi is an online free utility tool for PDF files. With pdfPi, you can combine or merge and split PDF documents and files, for free. It's all clean: no watermarks, no embeded logo/url links. Give it a try now! </p>
 
-  <div class="hero-unit">
-    <h1>Welcome to pdfPi!</h1>
-		<br>
-    <p>pdfPi is an online free utility tool for PDF files. With pdfPi, you can combine or merge and split PDF documents and files, for free. It's all clean: no watermarks, no embeded logo/url links. Give it a try now! </p>
-    <p> <%= link_to "Combine PDFs >>", combine_url, :class => "btn btn-large btn-block btn-primary" %>
-    	 <%= link_to "Split PDF >>", split_url, :class => "btn btn-large btn-block btn-primary" %>
-    	</p>
-  </div>	
+<h3>Select one of the option below </h3>
+<ul class="select_grid">
+	<li><%= link_to combine_url do %> 
+			<div class="header">
+				Combine PDFs
+			</div>
+			<div class="content">
+				<p> Combine or merge multiple PDF files into one PDF file, with each file up to 50 MB and up to 10 files at a time. Use drag & drop to reorder before combining. </p>
+			</div>
+			<% end %>
+	</li>
+	<li><%= link_to split_url do %> 
+				<div class="header"> Split PDF </div>
+				<div class="content">
+					<p> Split one PDF into multiple PDF files, up to 10 splits, with upload size up to 50 MB. </p> 
+				</div>
+			<% end %>
+	</li>
+</ul>

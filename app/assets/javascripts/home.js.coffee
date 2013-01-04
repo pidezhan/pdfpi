@@ -1,7 +1,7 @@
 jQuery ->
   $('#new_upload').fileupload
     dataType: "script"
-    maxFileSize: 5000000
+    maxFileSize: 50000000
     maxNumberOfFiles: 10
     add: (e, data) ->
       that = $(this).data('fileupload')
