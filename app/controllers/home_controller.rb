@@ -133,8 +133,8 @@ class HomeController < ApplicationController
 	      n = 1
   	    ranges.each do |range|
   	      pdf = Prawn::Document.new(:skip_page_creation => true)
-	        (range[:from]..range[:to]).each do |n|
-	          pdf.start_new_page(:template => file_path, :template_page => n)
+	        (range[:from]..range[:to]).each do |page|
+	          pdf.start_new_page(:template => file_path, :template_page => page)
 	        end
 	        pdf.render_file(File.join(@download_folder, "split_#{n.to_s}.pdf"))
 	        input_filenames << File.join(@download_folder, "split_#{n.to_s}.pdf")
