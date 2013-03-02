@@ -177,23 +177,10 @@ class HomeController < ApplicationController
 	
 	def stamp
 	  @fonts = [
-	    "Antiqua",
 	    "Arial",
-	    "Avqest",
-	    "Blackletter",
 	    "Calibri",
-	    "Comic Sans",
 	    "Courier",
-	    "Georgia",
 	    "Helvetica",
-	    "Impact",
-	    "Minion",
-	    "Modern",
-	    "Monospace",
-	    "Palatino",
-	    "Roman",
-	    "Script",
-	    "Swiss",
 	    "Times New Roman",
 	    "Verdana"
 	    ]
@@ -224,7 +211,7 @@ class HomeController < ApplicationController
         y = pdf.bounds.top - 3
   	    pdf.create_stamp("user_stamp") do
   	      pdf.fill_color params[:font_color].gsub('#','')
-  	      pdf.font params[:font]
+  	      pdf.font get_font(params[:font])
   	      #pdf.stroke_rectangle [x, y], width, height
   	      pdf.transparent(params[:font_opacity].to_f) do
 	          pdf.text(params[:text], :size => params[:font_size].to_i, 
@@ -255,6 +242,18 @@ class HomeController < ApplicationController
 private
   def valid_range(from, to)
     from > 0 and to > 0 and to >= from
+  end
+  
+  def get_font(font_name)
+    font_location = File.join(Rails.root, 'config', 'fonts')
+    font_hash = {}
+    font_hash['Arial'] = File.join(font_location, 'Arial.ttf')
+    font_hash['Calibri'] = File.join(font_location, 'Calibri.ttf')
+    font_hash['Courier'] = "Courier"
+    font_hash['Helvetica'] = "Helvetica"
+    font_hash['Times New Roman'] = File.join(font_location, 'Times New Roman.ttf')
+    font_hash['Verdana'] = File.join(font_location, 'Verdana.ttf')
+    font_hash[font_name]
   end
 	
 end
