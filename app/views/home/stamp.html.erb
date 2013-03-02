@@ -1,0 +1,239 @@
+<h3> Stamp PDF </h3>
+<p>Give your PDF documents a stamp on every page, e.g. Confidential, Approved, Original, or your company name. Do it online, without the need to download and install any software. It's clean and neat, exactly as what you expected! </p>
+<p>The maximum file size for each upload is 50MB.</p>
+<br>
+<div id="stamp_upload">
+  <%= render @upload if @upload %>
+</div>
+<div class="clear"></div>
+
+
+<script id="template-upload" type="text/x-tmpl">
+{% if (o.error) { %}
+<div class="alert alert-error">
+  {%=o.name%} ({%=o.size_with_format%}): {%=o.error%} <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+{% } else { %}
+<div class="upload row">
+  <div class="span4"> {%=o.name%} ({%=o.size_with_format%}) </div>
+  <div class="span6 progress"><div class="bar" style="width: 0%;"></div></div>
+</div>
+{% } %}
+
+</script>
+
+<%= form_for Upload.new do |f| %>
+	<span class="btn btn-success fileinput-button">
+    <i class="icon-upload icon-white"></i>
+    <span>Select file...</span>
+    <%= f.file_field :upload, :accept => 'application/pdf' %>
+  </span>
+	<%= hidden_field_tag "job_id", session['stamp_job_id'] %>
+
+<% end %>
+<br><br>
+<div id="uploading"> </div>
+<br>
+
+<%= form_tag "/home/deliver_stamp", :id => "form_stamp", :class => "form-horizontal" do %>
+	<div class="control-group">
+		<%= label_tag :text, "Text", :class => "control-label" %>
+		<div class="controls">
+		<%= text_field_tag :text, nil, :placeholder => "e.g. Confidential" %>
+		<span id="text_error" class="help-inline"></span>
+		<% if false %>
+		<label class="checkbox inline">
+			<%= check_box_tag :have_border %> in a box?
+		</LABEL>
+		<% end %>
+		</div>
+		
+	</div>
+	<div class="control-group">
+		<%= label_tag :font, "Font", :class => "control-label" %>
+		<div class="controls">
+		<%= select_tag "font", options_for_select(@fonts, "Times New Roman")  %>
+		</div>
+	</div>
+	<div class="control-group">
+		<%= label_tag :size, "Size", :class => "control-label" %>
+		<div class="controls">
+			<div id="size" style="width:200px"></div>
+			<div id="size_value" style="display:inline">16</div>
+		</div>
+		<%= hidden_field_tag "font_size", 16 %>
+	</div>
+	<div class="control-group">
+		<%= label_tag :color, "Color", :class => "control-label" %>
+		<div class="controls">
+		<%#= select_tag "color", options_for_select(%w{Red Black Blue}) %>
+		<div id="color_picker" style=""></div>
+		</div>
+		<%= hidden_field_tag "font_color", '#ff0000' %>
+	</div>
+	<div class="control-group">
+		<%= label_tag :h_align, "Horizontal align", :class => "control-label" %>
+		<div class="controls">
+		<%= select_tag "h_align", options_for_select(%w{left center right}) %>
+		</div>
+	</div>
+	<div class="control-group">
+		<%= label_tag :v_align, "Vertical align", :class => "control-label" %>
+		<div class="controls">
+		<%= select_tag "v_align", options_for_select(%w{top center bottom}) %>
+		</div>
+	</div>
+	<div class="control-group">
+		<%= label_tag :opacity, "Opacity", :class => "control-label" %>
+		<div class="controls">
+			<div id="opacity" style="width:200px"></div> 
+			<div id="opacity_value" style="display:inline">100%</div>
+		</div>
+		<%= hidden_field_tag "font_opacity", 1 %>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<button type="submit" class="btn btn-large btn-primary">
+			  <%= image_tag "stamp.png"%>
+			  <span>Stamp</span>
+			</button>
+		</div>
+	</div>
+	
+<% end %>
+
+	Preview (Indicative, not in scale)
+	<div id="sample_page" style="border: 1px solid #333;margin-left:10px;">
+		<div id="sample_stamp" style="font-family:'Times New Roman';color:red;border-color:red;margin: 5px;padding:5px;display:inline">
+			<div id="sample_text" style="height:18px;min-width:10px;max-width:100%;display:inline"></div>
+		</div>
+	</div>
+
+
+<script>
+$(function(){
+	function position(){
+		$('#sample_stamp').position({
+			of: $("#sample_page"),
+			my: "center center",
+			at: $("#h_align").val() + " " + $("#v_align").val(),
+			collision: "fit",
+			within: $("#sample_page")
+		});
+	}
+	
+	function positionText(){
+		$('#sample_text').position({
+			of: $("#sample_stamp"),
+			my: "center center",
+			at: "center center",
+			collision: "fit",
+			within: $("#sample_stamp")
+		});
+	}
+	
+	function updateOpacity(){
+		var opacity = $('#opacity').slider("value");
+		$('#sample_stamp').css("opacity", opacity/100);
+		$('#opacity_value').text(opacity + "%");
+		$('#font_opacity').val(opacity/100);
+	}
+	
+	function updateSize(){
+		var size = $('#size').slider("value");
+		$('#sample_stamp').css("font-size", size + "px");
+		//$('#sample_text').css("height", function(){
+		//	return size;
+		//});
+		//$('#sample_stamp').css("height", function(){
+		//	return $('#sample_text').height() + 10;
+		//});
+		$('#size_value').text(size);
+		$('#font_size').val(size);
+		//updateWidth();
+	}
+	
+	function updateWidth(){
+		var keyword = $('#text').val();
+		var size = $('#size').slider("value");
+		var width = keyword.length*size/1.5;
+		//$('#sample_text').width(width);
+		$('#sample_stamp').width($('#sample_text').width() + 10);
+		position();
+		positionText();
+	}
+
+	$(document).ready(function(){
+		$("#sample_page").width("294px").height("416px");//.css('width', '294px').css('height', '416px');
+		//$("#sample_stamp").css('width', '0px');
+	});
+	$('#text').keyup(function(){
+		var keyword = $(this).val();
+		$('#sample_text').text(keyword);
+		if(keyword.length > 1){
+			$('#text').parents(".control-group").removeClass("error");
+			$('#text_error').text('');
+		}
+		updateWidth();
+	});
+	$('#have_border').click(function(){
+		if($(this).prop('checked')){
+			$('#sample_stamp').css('border-width', '1px').css('border-style', 'solid');
+		} else {
+			$('#sample_stamp').css('border-style', 'none');
+		}
+	});
+	/*
+	$('#color').change(function(){
+		var color = $(this).val();
+		$('#sample_stamp').css('color', color).css('border-color', color);
+	});
+	*/
+	$('#h_align, #v_align').change(function(){
+		position();
+	});
+	$( "#opacity" ).slider({
+     orientation: "horizontal",
+     range: "min",
+     max: 100,
+     value: 100,
+     slide: updateOpacity,
+     change: updateOpacity
+   });
+	$( "#size" ).slider({
+     orientation: "horizontal",
+     range: "min",
+     max: 50,
+		 min: 5,
+     value: 16,
+     slide: updateSize,
+     change: updateSize
+   });
+	$('#font').change(function(){
+		$('#sample_stamp').css('font-family', $(this).val() );
+	});
+	$("#color_picker").wColorPicker({
+			initColor: '#FF0000',
+			theme: "blue",
+			mode: "hover",
+			showSpeed: 600,
+			hideSpeed: 600,
+			onSelect: function(color) {
+				$('#sample_stamp').css('color', color);
+				$('#sample_stamp').css('border-color', color);
+				$('#font_color').val(color);
+			},
+	});
+	$('#form_stamp').submit(function(){
+		var keyword = $('#text').val();
+		if(keyword.length < 2){
+			$('#text').parents(".control-group").addClass("error");
+			$('#text_error').text("Keyword is missing");
+			return false;
+		}
+	});
+	position();
+	positionText();
+});
+	
+</script>

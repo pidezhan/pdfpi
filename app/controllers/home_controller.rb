@@ -175,6 +175,83 @@ class HomeController < ApplicationController
 	  end
 	end
 	
+	def stamp
+	  @fonts = [
+	    "Antiqua",
+	    "Arial",
+	    "Avqest",
+	    "Blackletter",
+	    "Calibri",
+	    "Comic Sans",
+	    "Courier",
+	    "Georgia",
+	    "Helvetica",
+	    "Impact",
+	    "Minion",
+	    "Modern",
+	    "Monospace",
+	    "Palatino",
+	    "Roman",
+	    "Script",
+	    "Swiss",
+	    "Times New Roman",
+	    "Verdana"
+	    ]
+	    
+	    session['stamp_job_id'] ||= get_job_id
+  	  @upload = Upload.where(:job_id => session['stamp_job_id']).order('updated_at desc').first
+	end
+	
+	def deliver_stamp
+	  if request.post?
+	    @upload = Upload.where(:job_id => session['stamp_job_id']).order('updated_at desc').first
+	    if session['stamp_job_id'] and @upload
+	      require 'prawn'
+  	    @doc_path = File.join(Rails.root, 'public', 'system', 'uploads')
+  	    file_path = @doc_path + "/" + @upload.id.to_s + "/original/" + @upload.upload_file_name
+	      
+	      @download_folder = File.join(Rails.root, 'public', 'system', 'downloads', session['stamp_job_id'])
+	      download_file_name = "pdfPi.com_stamped_#{@upload.upload_file_name}"
+  	    @download_link = File.join('system', 'downloads', session['stamp_job_id'], download_file_name)
+        # create folder
+  	    require 'fileutils'
+  	    FileUtils.mkpath @download_folder
+        
+        width = 100
+        height = 50
+        pdf = Prawn::Document.new(:template => file_path)
+        x = pdf.bounds.left + 3
+        y = pdf.bounds.top - 3
+  	    pdf.create_stamp("user_stamp") do
+  	      pdf.fill_color params[:font_color].gsub('#','')
+  	      pdf.font params[:font]
+  	      #pdf.stroke_rectangle [x, y], width, height
+  	      pdf.transparent(params[:font_opacity].to_f) do
+	          pdf.text(params[:text], :size => params[:font_size].to_i, 
+	            :align => (params[:h_align] == "left" ? :left : (params[:h_align] == "center" ? :center : :right)), 
+	            :valign => (params[:v_align] == "top" ? :top : (params[:v_align] == "center" ? :center : :bottom)))
+	        end
+  	    end
+    	  
+    	  pdf.repeat(:all) do
+    	    pdf.stamp "user_stamp"
+    	  end
+    	  
+  	    pdf.render_file(File.join( @download_folder, download_file_name) )
+  	    
+  	    # reset session
+  	    Upload.where(:job_id => session['stamp_job_id']).delete_all
+  	    session['stamp_job_id'] = nil
+  	  else
+  	    flash[:error] = "No PDF to stamp"
+  	    redirect_to :action => 'stamp'
+  	  end
+  	else
+  	  flash[:info] = "Stamp PDF from here"
+	    redirect_to :action => 'stamp'
+	  end
+	end
+	
 private
   def valid_range(from, to)
     from > 0 and to > 0 and to >= from

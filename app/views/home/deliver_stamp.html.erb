@@ -1,0 +1,25 @@
+<h3>Thank you for using pdfPi</h3>
+<p> The stamped PDF file is available from the link below: </p>
+
+<div class="well">
+	<div>
+		<%= link_to download_link_prefix + @download_link, "/" + @download_link %>
+	</div>
+	<div> </div>
+</div>
+
+<br>
+<div>
+	<%= link_to "Stamp another PDF", stamp_url, :class => "btn btn-large btn-primary" %>
+</div>
+<br>
+
+<p><span class="label label-important">Important</span> Please do NOT refresh this page or click the Back button of the browser before taking down the link. Otherwise, the link to download the combined PDF will be lost. </p>
+
+<div class="container">
+	<div id="getsat-widget-3458"></div>
+	<script type="text/javascript" src="https://loader.engage.gsfn.us/loader.js"></script>
+	<script type="text/javascript">
+	if (typeof GSFN !== "undefined") { GSFN.loadWidget(3458,{"containerId":"getsat-widget-3458"}); }
+	</script>
+</div>

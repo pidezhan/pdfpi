@@ -16,4 +16,5 @@
 //= require bootstrap
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
+//= require wcolorpicker
 //= require_tree .
