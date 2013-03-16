@@ -34,80 +34,87 @@
 <br><br>
 <div id="uploading"> </div>
 <br>
+<div class="row">
+	<div class="span6">
+		<%= form_tag "/home/deliver_stamp", :id => "form_stamp", :class => "form-horizontal" do %>
+			<div class="control-group">
+				<%= label_tag :text, "Text", :class => "control-label" %>
+				<div class="controls">
+				<%= text_field_tag :text, nil, :placeholder => "e.g. Confidential" %>
+				<span id="text_error" class="help-inline"></span>
+				<% if false %>
+				<label class="checkbox inline">
+					<%= check_box_tag :have_border %> in a box?
+				</LABEL>
+				<% end %>
+				</div>
 
-<%= form_tag "/home/deliver_stamp", :id => "form_stamp", :class => "form-horizontal" do %>
-	<div class="control-group">
-		<%= label_tag :text, "Text", :class => "control-label" %>
-		<div class="controls">
-		<%= text_field_tag :text, nil, :placeholder => "e.g. Confidential" %>
-		<span id="text_error" class="help-inline"></span>
-		<% if false %>
-		<label class="checkbox inline">
-			<%= check_box_tag :have_border %> in a box?
-		</LABEL>
+			</div>
+			<div class="control-group">
+				<%= label_tag :font, "Font", :class => "control-label" %>
+				<div class="controls">
+				<%= select_tag "font", options_for_select(@fonts, "Times New Roman")  %>
+				</div>
+			</div>
+			<div class="control-group">
+				<%= label_tag :size, "Size", :class => "control-label" %>
+				<div class="controls">
+					<div id="size" style="width:200px"></div>
+					<div id="size_value" style="display:inline">16</div>
+				</div>
+				<%= hidden_field_tag "font_size", 16 %>
+			</div>
+			<div class="control-group">
+				<%= label_tag :color, "Color", :class => "control-label" %>
+				<div class="controls">
+				<%#= select_tag "color", options_for_select(%w{Red Black Blue}) %>
+				<div id="color_picker" style=""></div>
+				</div>
+				<%= hidden_field_tag "font_color", '#ff0000' %>
+			</div>
+			<div class="control-group">
+				<%= label_tag :h_align, "Horizontal align", :class => "control-label" %>
+				<div class="controls">
+				<%= select_tag "h_align", options_for_select(%w{left center right}) %>
+				</div>
+			</div>
+			<div class="control-group">
+				<%= label_tag :v_align, "Vertical align", :class => "control-label" %>
+				<div class="controls">
+				<%= select_tag "v_align", options_for_select(%w{top center bottom}) %>
+				</div>
+			</div>
+			<div class="control-group">
+				<%= label_tag :opacity, "Opacity", :class => "control-label" %>
+				<div class="controls">
+					<div id="opacity" style="width:200px"></div> 
+					<div id="opacity_value" style="display:inline">100%</div>
+				</div>
+				<%= hidden_field_tag "font_opacity", 1 %>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn btn-large btn-primary">
+					  <%= image_tag "stamp.png"%>
+					  <span>Stamp</span>
+					</button>
+				</div>
+			</div>
+
 		<% end %>
+		
+	</div>
+	<div class="span6">
+		Preview (Indicative only, not in scale)
+		<div id="sample_page" style="border: 1px solid #ccc;margin:10px;">
+			<div id="sample_stamp" style="font-family:'Times New Roman';color:red;border-color:red;margin: 5px;padding:5px;display:inline">
+				<div id="sample_text" style="height:18px;min-width:10px;max-width:100%;display:inline"></div>
+			</div>
 		</div>
 		
 	</div>
-	<div class="control-group">
-		<%= label_tag :font, "Font", :class => "control-label" %>
-		<div class="controls">
-		<%= select_tag "font", options_for_select(@fonts, "Times New Roman")  %>
-		</div>
-	</div>
-	<div class="control-group">
-		<%= label_tag :size, "Size", :class => "control-label" %>
-		<div class="controls">
-			<div id="size" style="width:200px"></div>
-			<div id="size_value" style="display:inline">16</div>
-		</div>
-		<%= hidden_field_tag "font_size", 16 %>
-	</div>
-	<div class="control-group">
-		<%= label_tag :color, "Color", :class => "control-label" %>
-		<div class="controls">
-		<%#= select_tag "color", options_for_select(%w{Red Black Blue}) %>
-		<div id="color_picker" style=""></div>
-		</div>
-		<%= hidden_field_tag "font_color", '#ff0000' %>
-	</div>
-	<div class="control-group">
-		<%= label_tag :h_align, "Horizontal align", :class => "control-label" %>
-		<div class="controls">
-		<%= select_tag "h_align", options_for_select(%w{left center right}) %>
-		</div>
-	</div>
-	<div class="control-group">
-		<%= label_tag :v_align, "Vertical align", :class => "control-label" %>
-		<div class="controls">
-		<%= select_tag "v_align", options_for_select(%w{top center bottom}) %>
-		</div>
-	</div>
-	<div class="control-group">
-		<%= label_tag :opacity, "Opacity", :class => "control-label" %>
-		<div class="controls">
-			<div id="opacity" style="width:200px"></div> 
-			<div id="opacity_value" style="display:inline">100%</div>
-		</div>
-		<%= hidden_field_tag "font_opacity", 1 %>
-	</div>
-	<div class="control-group">
-		<div class="controls">
-			<button type="submit" class="btn btn-large btn-primary">
-			  <%= image_tag "stamp.png"%>
-			  <span>Stamp</span>
-			</button>
-		</div>
-	</div>
-	
-<% end %>
+</div>
 
-	Preview (Indicative, not in scale)
-	<div id="sample_page" style="border: 1px solid #333;margin-left:10px;">
-		<div id="sample_stamp" style="font-family:'Times New Roman';color:red;border-color:red;margin: 5px;padding:5px;display:inline">
-			<div id="sample_text" style="height:18px;min-width:10px;max-width:100%;display:inline"></div>
-		</div>
-	</div>
 
 
 <script>
