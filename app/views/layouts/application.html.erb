@@ -28,7 +28,7 @@
 		<div class="row">
 			<div class="span2"> 
 				<%= link_to root_url do %>
-					<%= image_tag "logo_beta.png" %>
+					<%= image_tag "logo.png" %>
 				<% end %> </div>
 			<div class="span3 offset2">
 				<br/>
@@ -80,6 +80,10 @@
 			</li>
     	<li><%= link_to split_path, :class => (controller_name == "home" and action_name == "split" ? "active" : "") do %>
 					 Split PDF
+	 			<% end %>
+			</li>
+			<li><%= link_to why_us_path, :class => (controller_name == "home" and action_name == "why_us" ? "active" : "") do %>
+					 Why us?
 	 			<% end %>
 			</li>
 			<li><a href="http://pdfpi.blogspot.sg" target="_blank"> Blog </a>

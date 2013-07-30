@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218052457) do
+ActiveRecord::Schema.define(:version => 20130730142036) do
+
+  create_table "jobs", :force => true do |t|
+    t.string   "job_type"
+    t.string   "download_path"
+    t.datetime "expiry_date"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "uploads", :force => true do |t|
     t.string   "upload_file_name"

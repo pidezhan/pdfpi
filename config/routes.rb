@@ -15,6 +15,7 @@ Pdfpi::Application.routes.draw do
   post 'home/deliver_stamp', :as => 'deliver_stamp'
   get 'home/stamp', :as => "stamp"
   get 'home/test', :as => "test"
+  get 'home/why_us', :as => "why_us"
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

@@ -1,0 +1,14 @@
+new table job to record what jobs user has created
+
+fields:
+job id
+type
+download file path
+expiry date
+
+rails g model Job job_type:string download_path:string expiry_date:datetime
+rake db:migrate
+
+git commit
+git push
+cap deploy

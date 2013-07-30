@@ -80,8 +80,11 @@ class UploadsController < ApplicationController
   # DELETE /uploads/1
   # DELETE /uploads/1.json
   def destroy
+    require 'fileutils'
     @upload = Upload.find(params[:id])
+    file_path = File.join(Rails.root, 'public', 'system', 'uploads') + "/" + @upload.id.to_s + "/original/" + @upload.upload_file_name
     @upload.destroy
+    FileUtils.rm file_path
 
     respond_to do |format|
       format.html { redirect_to  combine_url }

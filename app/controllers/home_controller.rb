@@ -17,6 +17,9 @@ class HomeController < ApplicationController
 		
 	end
 	
+	def why_us
+	end
+	
 	def combine
 	  session['combine_job_id'] ||= get_job_id
 	  @uploads = Upload.where(:job_id => session['combine_job_id'])
@@ -38,7 +41,7 @@ class HomeController < ApplicationController
 	  end
 	end
 	
-	def deliver
+	def deliver # delivery combine
 	  
 	  @doc_path = File.join(Rails.root, 'public', 'system', 'uploads')
 
@@ -64,6 +67,13 @@ class HomeController < ApplicationController
   	    @download_link = File.join('system', 'downloads', session['combine_job_id'], file_name)
 
         pdf.render_file(File.join( @download_path, file_name) )
+        
+        #remove all upload files related to this job
+        @uploads.each do | upload |
+          file_path = @doc_path + "/" + upload.id.to_s + "/original/" + upload.upload_file_name
+          FileUtils.rm file_path
+        end
+        
         @uploads.delete_all
   	    #send_data pdf.render, filename: "combined_into_one.pdf", type: "application/pdf"
   	    
@@ -163,7 +173,15 @@ class HomeController < ApplicationController
 =end
 
   	    # reset session
-  	    Upload.where(:job_id => session['split_job_id']).delete_all
+  	    
+  	    #remove all upload files related to this job
+  	    @uploads = Upload.where(:job_id => session['split_job_id'])
+        @uploads.each do | upload |
+          file_path = @doc_path + "/" + upload.id.to_s + "/original/" + upload.upload_file_name
+          FileUtils.rm file_path
+        end
+        
+  	    @uploads.delete_all
   	    session['split_job_id'] = nil
   	  else
   	    flash[:error] = "No PDF to split"
@@ -227,7 +245,13 @@ class HomeController < ApplicationController
   	    pdf.render_file(File.join( @download_folder, download_file_name) )
   	    
   	    # reset session
-  	    Upload.where(:job_id => session['stamp_job_id']).delete_all
+  	    #remove all upload files related to this job
+  	    @uploads = Upload.where(:job_id => session['stamp_job_id'])
+        @uploads.each do | upload |
+          file_path = @doc_path + "/" + upload.id.to_s + "/original/" + upload.upload_file_name
+          FileUtils.rm file_path
+        end
+  	    @uploads.delete_all
   	    session['stamp_job_id'] = nil
   	  else
   	    flash[:error] = "No PDF to stamp"

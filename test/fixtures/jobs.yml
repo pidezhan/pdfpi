@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  job_type: MyString
+  download_path: MyString
+  expiry_date: 2013-07-30 22:20:36
+
+two:
+  job_type: MyString
+  download_path: MyString
+  expiry_date: 2013-07-30 22:20:36
