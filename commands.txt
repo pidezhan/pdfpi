@@ -9,6 +9,6 @@ expiry date
 rails g model Job job_type:string download_path:string expiry_date:datetime
 rake db:migrate
 
-git commit
+git commit . -m "message"
 git push
 cap deploy
