@@ -34,6 +34,8 @@ class ApplicationController < ActionController::Base
       if action_name != "index"
         page_title = action_name.titleize + " PDF Online"
       end
+    elsif controller_name == "feedback"
+      page_title = "Feedback"
     else
       page_title = action_name.titleize
     end

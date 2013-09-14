@@ -12,3 +12,7 @@ rake db:migrate
 git commit . -m "message"
 git push
 cap deploy
+
+rails g mailer feedback_mailer feedback
+
+rails g controller feedback index

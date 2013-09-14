@@ -1,4 +1,7 @@
 Pdfpi::Application.routes.draw do
+  get "feedback/index", :as => "feedback"
+  post "feedback/index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
   resources :uploads

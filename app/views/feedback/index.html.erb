@@ -1,0 +1,42 @@
+
+
+<% if request.post? %>
+	<h2>
+	Thank you for your feedback! </h2> 
+	<p>It has been sent to us as below: </p>
+	<p>Name: <%= @name %></p>
+	<p>Email: <%= @email %> </p>
+	<p>Message: <%= @message %> </p>
+	<p>We will get back to you as soon as we can. Have a nice day!</p>
+<% else %>
+<h2>Your feedback is highly valued and appreciated by us!</h2>
+<p> Please tell us what you think or what problems you have encountered</p>
+<%= form_tag "/feedback/index", :id => "form_feedback", :class => "form-horizontal" do %>
+	<div class="control-group">
+		<%= label_tag :name, "Name", :class => "control-label" %>
+		<div class="controls">
+		<%= text_field_tag :name, nil, :placeholder => "e.g. Michael" %>
+		</div>
+	</div>
+	<div class="control-group">
+		<%= label_tag :email, "Email", :class => "control-label" %>
+		<div class="controls">
+		<%= text_field_tag :email, nil, :placeholder => "e.g. michael@gmail.com" %>
+		</div>
+	</div>
+	<div class="control-group">
+		<%= label_tag :msg, "Message", :class => "control-label" %>
+		<div class="controls">
+		<%= text_area_tag :msg, nil, :rows => 10, :style => 'width:500px', :placeholder => "e.g. I had a problem with the stamping function. This is what happened...." %>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<button type="submit" class="btn btn-large btn-primary">
+			  <span>Send Feedback</span>
+			</button>
+		</div>
+	</div>
+	
+<% end %>
+<% end %>
