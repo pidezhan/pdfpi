@@ -26,6 +26,7 @@ class HomeController < ApplicationController
 	  @doc_path = File.join(Rails.root, 'public', 'system', 'uploads')
 
 	  if request.post? and @uploads.size > 0
+=begin
 	    require 'prawn'
       pdf = Prawn::Document.new(:skip_page_creation => true)
 	    @uploads.each do |upload|
@@ -38,6 +39,7 @@ class HomeController < ApplicationController
 	    end
 	    
 	    send_data pdf.render, filename: "combined_into_one.pdf", type: "application/pdf"
+=end
 	  end
 	end
 	
@@ -47,9 +49,10 @@ class HomeController < ApplicationController
 
 	  if request.post? and params['job'] == 'combine'
 	    @uploads = Upload.where(:job_id => session['combine_job_id'])
-	    if session['combine_job_id'] and @uploads.size > 0
+	    if session['combine_job_id'] and @uploads.size > 1
 	      @download_path = File.join(Rails.root, 'public', 'system', 'downloads', session['combine_job_id'])
-	      file_name = "combined_into_one.pdf"
+	      file_name = "pdfpi.com.combined_into_one.pdf"
+=begin
 	      require 'prawn'
         pdf = Prawn::Document.new(:skip_page_creation => true)
   	    @uploads.each do |upload|
@@ -60,15 +63,25 @@ class HomeController < ApplicationController
   	        pdf.start_new_page(:template => file_path, :template_page => n)
   	      end
   	    end
-  	    
-  	    require 'fileutils'
+=end
+  	    file_list = ""
+        @uploads.each do |upload|
+          file_list = file_list + @doc_path + "/" + upload.id.to_s + "/original/" + upload.upload_file_name + " "
+        end
+        require 'fileutils'
   	    FileUtils.mkpath @download_path
   	    
+  	    # action!!
+  	    command = "java -jar #{pdfbox_jar} PDFMerger #{file_list} #{File.join( @download_path, file_name)}"
+        system command
+  	    
+  	    Rails.logger.debug("command: #{command.inspect}")
+        
   	    @download_link = File.join('system', 'downloads', session['combine_job_id'], file_name)
 
-        pdf.render_file(File.join( @download_path, file_name) )
+        #pdf.render_file(File.join( @download_path, file_name) )
         
-        #remove all upload files related to this job
+        # remove all upload files related to this job
         @uploads.each do | upload |
           file_path = @doc_path + "/" + upload.id.to_s + "/original/" + upload.upload_file_name
           FileUtils.rm file_path
@@ -80,11 +93,11 @@ class HomeController < ApplicationController
   	    # reset session['combine_job_id']
   	    session['combine_job_id'] = nil
 	    else
-	      flash[:error] = "No PDF documents to combine"
+	      flash[:error] = "Sorry, too few PDF documents are detected. We need at least 2 pdfs uploaded before combining."
 	      redirect_to :action => 'combine'
 	    end
 	  else
-	    flash[:info] = "Combine PDF documents from here"
+	    flash[:info] = "Combining PDF documents starts from this page."
 	    redirect_to :action => 'combine'
 	  end
 

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_job_id
   helper_method :download_link_prefix
   helper_method :get_title
+  helper_method :pdfbox_jar
   
   def get_job_id
     o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten
@@ -15,6 +16,14 @@ class ApplicationController < ActionController::Base
       "http://www.pdfpi.com/"
     else
       "http://localhost:3000/"
+    end
+  end
+  
+  def pdfbox_jar
+    if Rails.env.production?
+      "/home/deployer/pdfbox/pdfbox-app-1.8.2.jar"
+    else
+      "/Users/pidezhan/pdfbox/pdfbox-app-1.8.2.jar"
     end
   end
   
