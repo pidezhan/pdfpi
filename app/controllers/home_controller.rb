@@ -292,5 +292,9 @@ private
     font_hash['Verdana'] = File.join(font_location, 'Verdana.ttf')
     font_hash[font_name]
   end
+  
+  def escape_file_name(name)
+    
+  end
 	
 end

@@ -24,7 +24,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem "paperclip", "~> 2.4"
+gem "paperclip", "2.7.0"
 gem 'will_paginate', '> 3.0'
 gem 'prawn'
 gem "jquery-fileupload-rails"
