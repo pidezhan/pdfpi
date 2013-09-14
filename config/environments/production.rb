@@ -27,8 +27,10 @@ Pdfpi::Application.configure do
     domain: "pdfpi.com",
     authentification: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+    # user_name: ENV["GMAIL_USERNAME"],
+    # password: ENV["GMAIL_PASSWORD"]
+    user_name: "pdfpi.com",
+    password: "eilienE82"
   }
 
   # Defaults to nil and saved in location specified by config.assets.prefix
