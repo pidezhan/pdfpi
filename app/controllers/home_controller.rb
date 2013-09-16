@@ -75,7 +75,7 @@ class HomeController < ApplicationController
   	    command = "java -jar #{pdfbox_jar} PDFMerger #{file_list} #{File.join( @download_path, file_name)}"
         system command
   	    
-  	    Rails.logger.debug("command: #{command.inspect}")
+  	    # Rails.logger.debug("command: #{command.inspect}")
         
   	    @download_link = File.join('system', 'downloads', session['combine_job_id'], file_name)
 
@@ -155,15 +155,28 @@ class HomeController < ApplicationController
 	      ranges = ranges.uniq
 	      n = 1
   	    ranges.each do |range|
+=begin
   	      pdf = Prawn::Document.new(:skip_page_creation => true)
 	        (range[:from]..range[:to]).each do |page|
 	          pdf.start_new_page(:template => file_path, :template_page => page)
 	        end
 	        pdf.render_file(File.join(@download_folder, "split_#{n.to_s}.pdf"))
 	        input_filenames << File.join(@download_folder, "split_#{n.to_s}.pdf")
-	        n += 1
+	        
+=end
+          # action!!
+    	    command_split = "java -jar #{pdfbox_jar} PDFSplit -startPage #{range[:from]} -endPage #{range[:to]} #{file_path}"
+    	    Rails.logger.debug("command split: #{command_split.inspect}")
+          system command_split
+          split_file_name = File.join(@download_folder, "/pdfpi.com.split" + n.to_s + ".pdf")
+          command_mv = "mv #{file_path[0..file_path.length-5] + "-0.pdf"} #{split_file_name}"
+          Rails.logger.debug("command mv: #{command_mv.inspect}")
+          system command_mv
+          input_filenames << split_file_name
+          n += 1
   	    end
-  	    
+
+
   	    zipfile_name = @download_folder + "/" + download_file_name
   	    
   	    # generate zip file

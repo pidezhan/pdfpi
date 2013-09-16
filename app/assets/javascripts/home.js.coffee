@@ -12,7 +12,7 @@ jQuery ->
       if !(types.test(file.type) || types.test(file.name))
         file.error = "Wrong file format"
       else if (/^[a-zA-Z0-9-_\. ]*$/.test(file.name) == false)
-	      file.error = "Illegal characteristics (any of &$+,\/:;=?@<>\[\]\{\}\|\\\^~%#) detected in the file name. Please rename your file and try again"
+	      file.error = "Illegal characteristics (any of \(\)&$+,\/:;=?@<>\[\]\{\}\|\\\^~%#) detected in the file name. Please rename your file and try again"
       else if (file.size > options.maxFileSize)
         file.error = "File is too big"
       else if (quota < 1)
