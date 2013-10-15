@@ -14,8 +14,8 @@ class JobsController < ApplicationController
     if @job.download_path
       content_type = (@job.job_type == 'split' ? 'application/zip' : 'application/pdf')
       send_file @job.download_path, :type => content_type, :filename => File.basename(@job.download_path)
-    else
-      
+    else #error handling
+      FeedbackMailer.auto_report(@job.id).deliver
     end
   end
   

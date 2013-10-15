@@ -1,0 +1,18 @@
+Auto issue report from pdfpi.com
+
+Following job failed to be processed and downloaded.
+
+Job ID: <%= @job.id %>
+Session ID: <%= @job.session_id %>
+Created at: <%= @job.created_at %>
+
+Relevant uploads are:
+
+<% @uploads.each do |upload| %>
+	ID: <%= upload.id %>
+	Upload filename: <%= upload.upload_file_name %>
+	Upload file size: <%= upload.upload_file_size %>
+	Upload at: <%= upload.created_at %>
+	
+	
+<% end %>

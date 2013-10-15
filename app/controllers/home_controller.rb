@@ -88,15 +88,16 @@ class HomeController < ApplicationController
           FileUtils.rm file_path
         end
         
-        @uploads.delete_all
+        
   	    #send_data pdf.render, filename: "combined_into_one.pdf", type: "application/pdf"
-  	    @job = Job.where(:session_id => session['combine_job_id']).first
+  	    @job = Job.order('id desc').find_by_session_id(session['combine_job_id'])
   	    if @job
   	      @job.download_path = @download_path + "/" + file_name
   	      @job.download_link = @download_link
   	      @job.save
   	    end
   	    
+  	    #@uploads.delete_all
   	    # reset session['combine_job_id']
   	    session['combine_job_id'] = nil
   	    
@@ -225,7 +226,7 @@ class HomeController < ApplicationController
   	      @job.save
   	    end
         
-  	    @uploads.delete_all
+  	    #@uploads.delete_all
   	    session['split_job_id'] = nil
   	    
   	    flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"
@@ -308,7 +309,7 @@ class HomeController < ApplicationController
   	      @job.save
   	    end
   	    
-  	    @uploads.delete_all
+  	    #@uploads.delete_all
   	    session['stamp_job_id'] = nil
   	    
   	    flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"

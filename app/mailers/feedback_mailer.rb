@@ -13,4 +13,11 @@ class FeedbackMailer < ActionMailer::Base
 
     mail to: "pdfpi.com@gmail.com", subject: "User feedback on pdfpi.com"
   end
+  
+  def auto_report(job_id)
+    @job = Job.find(job_id)
+    @uploads = Upload.where(:job_id => @job.session_id)
+
+    mail to: "pdfpi.com@gmail.com", subject: "Auto issue report from pdfpi.com"
+  end
 end 
