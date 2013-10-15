@@ -16,3 +16,9 @@ cap deploy
 rails g mailer feedback_mailer feedback
 
 rails g controller feedback index
+
+rails g controller jobs index new
+
+rails g migration AddSessionIdAndSourceIpToJobs
+
+rails g migration AddDownloadLinkToJobs

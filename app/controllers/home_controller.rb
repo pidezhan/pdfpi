@@ -24,6 +24,7 @@ class HomeController < ApplicationController
 	  session['combine_job_id'] ||= get_job_id
 	  @uploads = Upload.where(:job_id => session['combine_job_id'])
 	  @doc_path = File.join(Rails.root, 'public', 'system', 'uploads')
+	  Job.create(:session_id => session['combine_job_id'], :job_type => "combine", :source_ip => request.remote_ip)
 
 	  if request.post? and @uploads.size > 0
 =begin
@@ -89,9 +90,18 @@ class HomeController < ApplicationController
         
         @uploads.delete_all
   	    #send_data pdf.render, filename: "combined_into_one.pdf", type: "application/pdf"
+  	    @job = Job.where(:session_id => session['combine_job_id']).first
+  	    if @job
+  	      @job.download_path = @download_path + "/" + file_name
+  	      @job.download_link = @download_link
+  	      @job.save
+  	    end
   	    
   	    # reset session['combine_job_id']
   	    session['combine_job_id'] = nil
+  	    
+  	    flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"
+	      redirect_to :action => 'download', :job_id => @job.session_id
 	    else
 	      flash[:error] = "Sorry, too few PDF documents are detected. We need at least 2 pdfs uploaded before combining."
 	      redirect_to :action => 'combine'
@@ -117,7 +127,8 @@ class HomeController < ApplicationController
 	def split
 	  session['split_job_id'] ||= get_job_id
 	  @upload = Upload.where(:job_id => session['split_job_id']).order('updated_at desc').first
-	  
+	  Job.create(:session_id => session['split_job_id'], :job_type => "split", :source_ip => request.remote_ip)
+    
 	end
 	
 	def deliver_split
@@ -207,8 +218,18 @@ class HomeController < ApplicationController
           FileUtils.rm file_path
         end
         
+        @job = Job.where(:session_id => session['split_job_id']).order('id desc').first
+  	    if @job
+  	      @job.download_path = zipfile_name
+  	      @job.download_link = @download_link
+  	      @job.save
+  	    end
+        
   	    @uploads.delete_all
   	    session['split_job_id'] = nil
+  	    
+  	    flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"
+	      redirect_to :action => 'download', :job_id => @job.session_id
   	  else
   	    flash[:error] = "No PDF to split"
   	    redirect_to :action => 'split'
@@ -231,6 +252,8 @@ class HomeController < ApplicationController
 	    
 	    session['stamp_job_id'] ||= get_job_id
   	  @upload = Upload.where(:job_id => session['stamp_job_id']).order('updated_at desc').first
+  	  Job.create(:session_id => session['stamp_job_id'], :job_type => "stamp", :source_ip => request.remote_ip)
+      
 	end
 	
 	def deliver_stamp
@@ -277,8 +300,20 @@ class HomeController < ApplicationController
           file_path = @doc_path + "/" + upload.id.to_s + "/original/" + upload.upload_file_name
           FileUtils.rm file_path
         end
+        
+        @job = Job.where(:session_id => session['stamp_job_id']).order('id desc').first
+  	    if @job
+  	      @job.download_path = File.join( @download_folder, download_file_name)
+  	      @job.download_link = @download_link
+  	      @job.save
+  	    end
+  	    
   	    @uploads.delete_all
   	    session['stamp_job_id'] = nil
+  	    
+  	    flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"
+	      redirect_to :action => 'download', :job_id => @job.session_id
+	      
   	  else
   	    flash[:error] = "No PDF to stamp"
   	    redirect_to :action => 'stamp'
@@ -287,6 +322,10 @@ class HomeController < ApplicationController
   	  flash[:info] = "Stamp PDF from here"
 	    redirect_to :action => 'stamp'
 	  end
+	end
+	
+	def download
+	  @job = Job.find_by_session_id(params['job_id'])
 	end
 	
 private

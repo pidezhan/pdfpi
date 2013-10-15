@@ -1,0 +1,27 @@
+<h1>Jobs Listing</h1>
+<table class="table-condensed">
+	<tr>
+		<td>Job ID</td>
+		<td>Job Type </td>
+		<td>Date created </td>
+		<td>Expiry date </td>
+		<td>Source IP </td>
+		<td>Session ID </td>
+		<td>Download path </td>
+		<td>Download Link </td>
+	</tr>
+<% @jobs.each do |job| %>
+	<tr>
+		<td> <%= job.id %> </td>
+		<td> <%= job.job_type %> </td>
+		<td> <%= job.created_at %> </td>
+		<td> <%= job.expiry_date %> </td>
+		<td> <%= job.source_ip %> </td>
+		<td> <%= job.session_id %> </td>
+		<td> <%= job.download_path %> </td>
+		<td> <%= job.download_link %> </td>
+	</tr>
+<% end %>
+</table>
+
+<%= will_paginate @jobs %>

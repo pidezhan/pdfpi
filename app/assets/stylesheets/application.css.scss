@@ -139,3 +139,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', end
 	padding: 15px;
 	border-top: solid 1px #ccc;
 }
+
+//-------------------------------------------------------------------------------
+//   Pagination fix for will_paginate and bootstrap
+//-------------------------------------------------------------------------------
+
+.pagination {
+  span.disabled {
+    color: #aaa !important;
+  }
+  em.current {
+    float: left;
+    padding: 0 14px;
+    line-height: 38px;
+    text-decoration: none;
+    background-color: white;
+    border: 1px solid #DDD;
+    border-left-width: 0;
+  }
+  .previous_page {
+    border-left: 1px solid #ddd;
+  }
+}
