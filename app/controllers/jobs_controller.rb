@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   
-  before_filter :authenticate
+  before_filter :authenticate, :except => :download
   
   def index
     @jobs = Job.order("id desc").paginate(:page => params[:page], :per_page => 30)
@@ -10,7 +10,7 @@ class JobsController < ApplicationController
   end
   
   def download
-    @job = Job.find_by_session_id(params[:id])
+    @job = Job.order('id desc').find_by_session_id(params[:id])
     if @job.download_path
       content_type = (@job.job_type == 'split' ? 'application/zip' : 'application/pdf')
       send_file @job.download_path, :type => content_type, :filename => File.basename(@job.download_path)
