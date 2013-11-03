@@ -24,7 +24,7 @@ class HomeController < ApplicationController
 	  session['combine_job_id'] ||= get_job_id
 	  @uploads = Upload.where(:job_id => session['combine_job_id'])
 	  @doc_path = File.join(Rails.root, 'public', 'system', 'uploads')
-	  Job.create(:session_id => session['combine_job_id'], :job_type => "combine", :source_ip => request.remote_ip) if not Job.find_by_session_id(session['combine_job_id'])
+	  Job.create(:session_id => session['combine_job_id'], :job_type => "combine", :source_ip => request.remote_ip, :status => 'in progress') if not Job.find_by_session_id(session['combine_job_id'])
 
 	  if request.post? and @uploads.size > 0
 =begin
@@ -257,7 +257,7 @@ class HomeController < ApplicationController
 	    
 	    session['stamp_job_id'] ||= get_job_id
   	  @upload = Upload.where(:job_id => session['stamp_job_id']).order('updated_at desc').first
-  	  Job.create(:session_id => session['stamp_job_id'], :job_type => "stamp", :source_ip => request.remote_ip) if not Job.find_by_session_id(session['stamp_job_id'])
+  	  Job.create(:session_id => session['stamp_job_id'], :job_type => "stamp", :source_ip => request.remote_ip, :status => 'in progress') if not Job.find_by_session_id(session['stamp_job_id'])
       
 	end
 	
