@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131015063301) do
+ActiveRecord::Schema.define(:version => 20131030065258) do
+
+  create_table "downloads", :force => true do |t|
+    t.integer  "job_id"
+    t.string   "source_ip"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "jobs", :force => true do |t|
     t.string   "job_type"
@@ -22,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20131015063301) do
     t.string   "session_id"
     t.string   "source_ip"
     t.string   "download_link"
+    t.string   "status"
   end
 
   create_table "uploads", :force => true do |t|

@@ -1,5 +1,5 @@
 <h1>Jobs Listing</h1>
-<table class="table-condensed">
+<table class="table table-condensed">
 	<tr>
 		<td>Job ID</td>
 		<td>Job Type </td>
@@ -7,19 +7,19 @@
 		<td>Expiry date </td>
 		<td>Source IP </td>
 		<td>Session ID </td>
-		<td>Download path </td>
-		<td>Download Link </td>
+		<td>Status </td>
+		<td>Download file exist? </td>
 	</tr>
 <% @jobs.each do |job| %>
 	<tr>
-		<td> <%= job.id %> </td>
+		<td> <%= link_to job.id, inspect_job_url(job) %> </td>
 		<td> <%= job.job_type %> </td>
-		<td> <%= job.created_at %> </td>
-		<td> <%= job.expiry_date %> </td>
+		<td> <%= job.created_at.localtime if job.created_at %> </td>
+		<td> <%= job.expiry_date.localtime if job.expiry_date %> </td>
 		<td> <%= job.source_ip %> </td>
-		<td> <%= job.session_id %> </td>
-		<td> <%= job.download_path %> </td>
-		<td> <%= job.download_link %> </td>
+		<td> <%= link_to job.session_id, inspect_job_url(job) %> </td>
+		<td> <%= job.status %> </td>
+		<td> <%= (job.download_path and File.exist?(job.download_path)) ? "Yes" : "No" %> </td>
 	</tr>
 <% end %>
 </table>

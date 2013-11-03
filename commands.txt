@@ -9,6 +9,8 @@ expiry date
 rails g model Job job_type:string download_path:string expiry_date:datetime
 rake db:migrate
 
+rake db:migrate RAILS_ENV="production" 
+
 git add .
 git commit . -m "message"
 git push
@@ -23,3 +25,7 @@ rails g controller jobs index new
 rails g migration AddSessionIdAndSourceIpToJobs
 
 rails g migration AddDownloadLinkToJobs
+
+rails g migration AddStatusToJobs
+
+rails g model Download job_id:integer source_ip:string

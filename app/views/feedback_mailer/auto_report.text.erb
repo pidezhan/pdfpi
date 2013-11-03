@@ -11,8 +11,8 @@ Relevant uploads are:
 <% @uploads.each do |upload| %>
 	ID: <%= upload.id %>
 	Upload filename: <%= upload.upload_file_name %>
-	Upload file size: <%= upload.upload_file_size %>
+	Upload file size: <%= number_to_human_size(upload.upload_file_size) %>
 	Upload at: <%= upload.created_at %>
 	
 	
-<% end %>
+<% end %> 

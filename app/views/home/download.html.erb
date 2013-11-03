@@ -8,7 +8,14 @@
 			<i class="icon-download-alt icon-white"></i> Download
 		<% end %>
 	</div>
-	<div> </div>
+	
+</div>
+
+<div> 
+	<%= form_tag "", :id => "form_email", :class => "form-inline" do %>
+			<%= text_field_tag :email, nil, :placeholder => "e.g. dave@gmail.com" %>
+			<%= button_tag "Email me the download link", :type => "submit", :class => "btn btn-primary", data: {disable_with: "Sending download link ..."} %>
+	<% end %>
 </div>
 
 <br>

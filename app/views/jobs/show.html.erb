@@ -1,0 +1,78 @@
+<h3>Congratulations! Your pdf document is ready for download! </h3>
+<br>
+<h4> The <%= @job.job_type %> file is available from the link below: </h4>
+
+<div class="well">
+	<div>
+		<%#= link_to download_link_prefix + @download_link, "/" + @download_link, :target => 'blank' %>
+		<%= link_to download_job_path(@job.session_id), :class => "btn btn-large btn-primary" do %>
+			<i class="icon-download-alt icon-white"></i> Download
+		<% end %>
+	</div>
+</div>
+
+<div> 
+	<%= form_tag email_job_url, :id => "form_email", :remote => true, :class => "form-inline" do %>
+			<%= text_field_tag :email, nil, :id => 'text_email', :placeholder => "e.g. dave@gmail.com" %>
+			<%= hidden_field_tag :job_id, @job.id %>
+			<%= button_tag "Email me the download link", :type => "submit", :id => "btn_email", :class => "btn btn-primary", data: {disable_with: "Sending the link ..."} %>
+			<div class="input-error" id="error_email"></div>
+	<% end %>
+</div>
+
+
+<br>
+<p>If you like what was done for you, please kindly give us a 5-star rating on the Google Chrome store. </p>
+
+<%= link_to "Rate this App now", "https://chrome.google.com/webstore/detail/pdfpi/mcbaeddpndondhghkhdppebndnbcepdo", :target => "blank", :class => "btn" %>
+<br><br>
+<p>If something went wrong, or you have any comments to us, please let us know by giving us a feedback.  </p>
+
+<%= link_to "Give feedback now", feedback_path, :target => "blank", :class => "btn" %>
+
+<br><br>
+<div class="container">
+	
+</div>
+<script>
+$(function(){
+	function isEmail(email) {
+	  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	  return regex.test(email);
+	}
+	
+	$('#text_email').change(function(){
+		var email = $(this).val();
+		var submitBtn = $('#btn_email');
+		if(!isEmail(email)){
+			$('#error_email').text('Please provide an valid email address');
+		}
+		else {
+			$('#error_email').text('');
+		}
+	});
+	
+	function SendEmail(){
+		var form = $('#form_email');
+		var submitBtn = $('#btn_email');
+		
+		submitBtn.addClass('disable');
+		form.submit(function(){
+			if(isEmail($('#text_email').val())){
+				submitBtn.removeClass('disable');
+			}
+			
+			if(submitBtn.hasClass('disable')){
+				return false;
+			}
+			else {
+				return true;
+			}
+		});
+	}
+	
+	SendEmail();
+	
+});
+	
+</script>

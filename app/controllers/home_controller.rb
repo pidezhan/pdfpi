@@ -94,6 +94,8 @@ class HomeController < ApplicationController
   	    if @job
   	      @job.download_path = @download_path + "/" + file_name
   	      @job.download_link = @download_link
+  	      @job.expiry_date = Time.now + 7.days
+  	      @job.status = (File.exist?(@job.download_path) ? "OK" : "ERROR" )
   	      @job.save
   	    end
   	    
@@ -101,10 +103,10 @@ class HomeController < ApplicationController
   	    # reset session['combine_job_id']
   	    session['combine_job_id'] = nil
   	    
-  	    flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"
-	      redirect_to :action => 'download', :job_id => @job.session_id
+  	    #flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"
+	      redirect_to :controller => 'jobs', :action => 'show', :id => @job.session_id
 	    else
-	      flash[:error] = "Sorry, too few PDF documents are detected. We need at least 2 pdfs uploaded before combining."
+	      flash[:error] = "Sorry, too few PDF documents are uploaded. We need at least 2 pdfs uploaded before combining."
 	      redirect_to :action => 'combine'
 	    end
 	  else
@@ -128,7 +130,7 @@ class HomeController < ApplicationController
 	def split
 	  session['split_job_id'] ||= get_job_id
 	  @upload = Upload.where(:job_id => session['split_job_id']).order('updated_at desc').first
-	  Job.create(:session_id => session['split_job_id'], :job_type => "split", :source_ip => request.remote_ip) if not Job.find_by_session_id(session['split_job_id'])
+	  Job.create(:session_id => session['split_job_id'], :job_type => "split", :source_ip => request.remote_ip, :status => 'in progress') if not Job.find_by_session_id(session['split_job_id'])
     
 	end
 	
@@ -223,14 +225,16 @@ class HomeController < ApplicationController
   	    if @job
   	      @job.download_path = zipfile_name
   	      @job.download_link = @download_link
+  	      @job.expiry_date = Time.now + 7.days
+  	      @job.status = (File.exist?(@job.download_path) ? "OK" : "ERROR" )
   	      @job.save
   	    end
         
   	    #@uploads.delete_all
   	    session['split_job_id'] = nil
   	    
-  	    flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"
-	      redirect_to :action => 'download', :job_id => @job.session_id
+  	    #flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"
+	      redirect_to :controller => 'jobs', :action => 'show', :id => @job.session_id
   	  else
   	    flash[:error] = "No PDF to split"
   	    redirect_to :action => 'split'
@@ -306,14 +310,16 @@ class HomeController < ApplicationController
   	    if @job
   	      @job.download_path = File.join( @download_folder, download_file_name)
   	      @job.download_link = @download_link
+  	      @job.expiry_date = Time.now + 7.days
+  	      @job.status = (File.exist?(@job.download_path) ? "OK" : "ERROR" )
   	      @job.save
   	    end
   	    
   	    #@uploads.delete_all
   	    session['stamp_job_id'] = nil
   	    
-  	    flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"
-	      redirect_to :action => 'download', :job_id => @job.session_id
+  	    #flash[:success] = "Congratulations! Your pdf documents have been processed successfully!"
+	      redirect_to :controller => 'jobs', :action => 'show', :id => @job.session_id
 	      
   	  else
   	    flash[:error] = "No PDF to stamp"

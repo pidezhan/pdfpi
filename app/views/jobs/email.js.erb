@@ -1,0 +1,5 @@
+<% if @status == "OK" %>
+$("#form_email").html("<div class='alert alert-success'>The download link has been sent to <%= @email %>. </div>");
+<% elsif %>
+$("#form_email").html("<div class='alert alert-error'>Invalid job or email address. </div>");
+<% end %>

@@ -1,0 +1,58 @@
+<h3>Job ID: <%= @job.id %> </h3>
+
+<table class="table table-condensed">
+	<tr>
+		<td>Session ID</td>
+		<td><%= @job.session_id%> </td>
+	</tr>
+	<tr>
+		<td>Source IP</td>
+		<td><%= @job.source_ip%> </td>
+	</tr>
+	<tr>
+		<td>Creation Date</td>
+		<td><%= @job.created_at.localtime%></td>
+	</tr>
+	<tr>
+		<td>Expiry Date</td>
+		<td><%= @job.expiry_date.localtime if @job.expiry_date %></td>
+	</tr>
+	<tr>
+		<td>Job Status</td>
+		<td><%= @job.status %></td>
+	</tr>
+</table>
+<%= link_to "Download", download_job_url(@job.session_id), :class=> "btn btn-primary"%>
+
+<br><br><br>
+<h4>Uploads </h4>
+<table class="table table-condensed">
+	<tr>
+		<td> ID </td>
+		<td> File Name </td>
+		<td>File size</td>
+		<td>Uploaded at</td>
+	</tr>
+<% @uploads.each do |upload| %>
+	<tr>
+		<td> <%= upload.id %></td>
+		<td> <%= upload.upload_file_name %></td>
+		<td> <%= number_to_human_size(upload.upload_file_size) %></td>
+		<td> <%= upload.created_at.localtime %></td>
+	</tr>
+<% end %>
+</table>
+
+<h4>Downloads </h4>
+<table class="table table-condensed">
+	<tr>
+		<td> IP Address </td>
+		<td> Downloaded at </td>
+	</tr>
+<% @downloads.each do |download| %>
+	<tr>
+		<td> <%= download.source_ip %></td>
+		<td> <%= download.created_at.localtime %></td>
+	</tr>
+<% end %>
+</table>

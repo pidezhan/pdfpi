@@ -11,6 +11,11 @@ Pdfpi::Application.routes.draw do
   resources :jobs do
     member do
       get :download
+      get :invalid
+      get :expired
+      get :p_error
+      get :inspect
+      post :email
     end
   end
   

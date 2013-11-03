@@ -6,10 +6,11 @@ class FeedbackMailer < ActionMailer::Base
   #
   #   en.feedback_mailer.feedback.subject
   #
-  def feedback(name, email, message)
+  def feedback(name, email, message, ip)
     @name = name
     @email = email
     @message = message
+    @ip = ip
 
     mail to: "pdfpi.com@gmail.com", subject: "User feedback on pdfpi.com"
   end
@@ -19,5 +20,11 @@ class FeedbackMailer < ActionMailer::Base
     @uploads = Upload.where(:job_id => @job.session_id)
 
     mail to: "pdfpi.com@gmail.com", subject: "Auto issue report from pdfpi.com"
+  end
+  
+  def send_link(link, email)
+    @link = link
+    
+    mail to: email, subject: "Your download link from pdfPi.com"
   end
 end 
