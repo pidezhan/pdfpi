@@ -36,6 +36,8 @@ class ApplicationController < ActionController::Base
       end
     elsif controller_name == "feedback"
       page_title = "Feedback"
+    elsif controller_name == "jobs" and action_name == "show"
+      page_title = "Job success!"
     else
       page_title = action_name.titleize
     end
