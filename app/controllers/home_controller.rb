@@ -85,7 +85,7 @@ class HomeController < ApplicationController
         # remove all upload files related to this job
         @uploads.each do | upload |
           file_path = @doc_path + "/" + upload.id.to_s + "/original/" + upload.upload_file_name
-          FileUtils.rm file_path
+          #FileUtils.rm file_path
         end
         
         
@@ -218,7 +218,7 @@ class HomeController < ApplicationController
   	    @uploads = Upload.where(:job_id => session['split_job_id'])
         @uploads.each do | upload |
           file_path = @doc_path + "/" + upload.id.to_s + "/original/" + upload.upload_file_name
-          FileUtils.rm file_path
+          #FileUtils.rm file_path
         end
         
         @job = Job.where(:session_id => session['split_job_id']).order('id desc').first
@@ -303,7 +303,7 @@ class HomeController < ApplicationController
   	    @uploads = Upload.where(:job_id => session['stamp_job_id'])
         @uploads.each do | upload |
           file_path = @doc_path + "/" + upload.id.to_s + "/original/" + upload.upload_file_name
-          FileUtils.rm file_path
+          #FileUtils.rm file_path
         end
         
         @job = Job.where(:session_id => session['stamp_job_id']).order('id desc').first
