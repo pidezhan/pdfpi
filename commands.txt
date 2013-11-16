@@ -11,6 +11,12 @@ rake db:migrate
 
 rake db:migrate RAILS_ENV="production" 
 
+psql pdfpi_pro -U pdfpi
+\d table_name
+\copy (Select * From uploads) To '/home/deployer/db/uploads.csv' With CSV Header
+\copy (Select * From jobs) To '/home/deployer/db/jobs.csv' With CSV Header
+\copy (Select * From downloads) To '/home/deployer/db/downloads.csv' With CSV Header
+
 git add .
 git commit . -m "message"
 git push

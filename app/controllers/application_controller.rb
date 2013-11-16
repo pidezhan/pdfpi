@@ -23,13 +23,13 @@ class ApplicationController < ActionController::Base
     if Rails.env.production?
       "/home/deployer/pdfbox/pdfbox-app-1.8.2.jar"
     else
-      "/Users/pidezhan/pdfbox/pdfbox-app-1.8.2.jar"
+      "/tmp/pdfbox/pdfbox-app-1.8.2.jar"
     end
   end
   
   def get_title
     page_title = ""
-    site_title = "Stamp PDF, Combine PDF and split PDF online for free with pdfPi.com"
+    site_title = "Combine and split PDF online for free with pdfPi.com"
     if controller_name == "home"
       if action_name != "index"
         page_title = action_name.titleize + " PDF Online"

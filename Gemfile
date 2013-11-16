@@ -29,7 +29,7 @@ gem 'will_paginate', '> 3.0'
 gem 'prawn'
 gem "jquery-fileupload-rails"
 
-gem 'pg'
+gem 'pg', '0.14.0'
 
 gem 'rubyzip', :require => 'zip/zip'
 
