@@ -1,5 +1,8 @@
 require "bundler/capistrano"
 
+set :whenever_command, "bundle exec whenever"
+require 'whenever/capistrano'
+
 server "106.186.20.17", :web, :app, :db, primary: true
 
 set :application, "pdfpi"
