@@ -29,10 +29,10 @@ class ApplicationController < ActionController::Base
   
   def get_title
     page_title = ""
-    site_title = "Combine and split PDF online for free with pdfPi.com"
+    site_title = "Combine and split PDF online for free - pdfPi.com"
     if controller_name == "home"
       if action_name != "index"
-        page_title = action_name.titleize + " PDF Online"
+        page_title = action_name.titleize
       end
     elsif controller_name == "feedback"
       page_title = "Feedback"

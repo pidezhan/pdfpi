@@ -45,6 +45,8 @@ gem 'unicorn'
 # Deploy with Capistrano
 gem 'capistrano'
 
+gem 'metamagic'
+
 # To use debugger
 # gem 'debugger'
 gem 'whenever', require: false

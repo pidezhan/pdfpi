@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= get_title %> </title>
+  <%= metamagic :title => get_title, :description => "Combine, merge, split and stamp PDF documents online for free with pdfPi.com. No installation, no registration. Very fast. Large file size limit up to 100 MB. ", :keywords => %w(combine merge split stamp pdf file free online pdfpi.com) %>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -69,11 +69,7 @@
 			<li><%= link_to root_url, :class => (controller_name == "home" and action_name == "index" ? "active" : "") do %>
 				 Home
 				<% end %>
-				</li>
-				<li><%= link_to stamp_path, :class => (controller_name == "home" and action_name == "stamp" ? "active" : "") do %> 
-						 Stamp PDF
-						<% end %>
-				</li>
+
     	<li><%= link_to combine_path, :class => (controller_name == "home" and action_name == "combine" ? "active" : "") do %> 
 					 Combine PDFs
 					<% end %>
@@ -81,6 +77,11 @@
     	<li><%= link_to split_path, :class => (controller_name == "home" and action_name == "split" ? "active" : "") do %>
 					 Split PDF
 	 			<% end %>
+			</li>
+			</li>
+			<li><%= link_to stamp_path, :class => (controller_name == "home" and action_name == "stamp" ? "active" : "") do %> 
+					 Stamp PDF
+					<% end %>
 			</li>
 			<li><%= link_to why_us_path, :class => (controller_name == "home" and action_name == "why_us" ? "active" : "") do %>
 					 Why us?

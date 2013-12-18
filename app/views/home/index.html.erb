@@ -1,21 +1,13 @@
 <h2>Welcome to pdfPi!</h2>
 <br>
-  <p>pdfPi is an online free utility tool for working with PDF files. With pdfPi, you can stamp, combine or merge and split your PDF documents and files, for free. It's all clean: no embeded logo/url links. Click one of the buttons below to try it out! </p>
+  <p>Combine, split or stamp your PDF documents online for free. No installation of any plugin is required. No registration is required. Large file size limit. Click one of the buttons below to try it out! </p>
 
 <h3>Select one of the option below </h3>
 <ul class="select_grid">
-	<li><%= link_to stamp_url do %> 
-			<div class="header">
-				Stamp PDF
-			</div>
-			<div class="content">
-				<p> Give your PDF documents a text stamp/watermark on every page, without the need to download and install any software. It's clean and neat, exactly as what you expected.</p>
-			</div>
-			<% end %>
-	</li>
+	
 	<li><%= link_to combine_url do %> 
 			<div class="header">
-				Combine PDFs
+				Combine
 			</div>
 			<div class="content">
 				<p> Combine or merge multiple PDF files into one PDF file, with each individual file up to 100 MB and up to 10 files at a time. Use drag & drop to reorder before combining. </p>
@@ -23,10 +15,19 @@
 			<% end %>
 	</li>
 	<li><%= link_to split_url do %> 
-				<div class="header"> Split PDF </div>
+				<div class="header"> Split </div>
 				<div class="content">
 					<p> Split one PDF into multiple PDF files, up to 10 splits, with upload size up to 100 MB. </p> 
 				</div>
+			<% end %>
+	</li>
+	<li><%= link_to stamp_url do %> 
+			<div class="header">
+				Stamp
+			</div>
+			<div class="content">
+				<p> Give your PDF documents a text stamp/watermark on every page, without the need to download and install any software. It's clean and neat, exactly as what you expected.</p>
+			</div>
 			<% end %>
 	</li>
 </ul>
@@ -34,7 +35,9 @@
 <div style="clear:left">
 <h3>Why us? </h3>
 <p>
-If you are looking to process your pdf documents just by a web browser, without being annoyed by installing unknown plugins or software, you have come to the right site!
+	
+Merge, split or stamp your PDF documents online just with a browser. There are so many reasons to choose us: absolutely free, no account creation, large file size limit, no installation, ...
+
 </p>
 <h4> Super friendly interface </h4>
 <p>
@@ -43,7 +46,7 @@ pdfPi.com has the super user-friendly and clean user interface to upload your do
 <h4> Clean work, just as you wished! </h4>
 <p>All processed documents are clean, which means that there won't be any planted ads in your pdf documents. You will get what exactly you expected, without anything extra. </p>
 
-<h4> Large upload file size </h4>
+<h4> Large file size limit </h4>
 <p>The file size limit is 100 MB per document. This means you can upload a 1000-page e-book for processing! </p>
 
 <h4>Feel safe with us </h4>
