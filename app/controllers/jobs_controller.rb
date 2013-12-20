@@ -65,7 +65,7 @@ class JobsController < ApplicationController
       if @job and @email
         FeedbackMailer.send_link(download_job_url(@job.session_id), @email).deliver
         @status = "OK"
-      elsif
+      else
         @status = "ERROR"
       end
       respond_to do |format|

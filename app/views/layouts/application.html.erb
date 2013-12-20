@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> <%= get_title %> </title>
+	<title> <%= @title || "Combine and Split PDF documents easily online for free - pdfPi.com" %> </title>
   <%#= metamagic :title => get_title, :description => "Combine, merge, split and stamp PDF documents online for free with pdfPi.com. No installation, no registration. Very fast. Large file size limit up to 100 MB. ", :keywords => %w(combine merge split stamp pdf file free online pdfpi.com) %>
+	<meta content="<%= @description || "Combine, merge, split and stamp PDF documents online for free with pdfPi.com. No installation, no registration. Very fast. Large file size limit up to 100 MB. " %>" name="description" />
+	<meta content="<%= @keywords.nil? ? "combine, merge, split, stamp, pdf, file, free, online, pdfpi.com" : @keywords.join(", ") %>"  name="keywords" />
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>

@@ -24,6 +24,10 @@ class HomeController < ApplicationController
 	end
 	
 	def combine
+	  @title = "Combine or Merge PDF files online easily for free - pdfPi.com"
+	  @description = "Merge PDF files online with 3 easy steps, 1.) upload 2.) re-order 3.) combine. Drag and drop to upload multiple files at the same time. Drag and drop to re-order. Processing takes only a few seconds."
+	  @keywords = %w(combine merge PDF documents online free)
+	  
 	  session['combine_job_id'] ||= get_job_id
 	  @uploads = Upload.where(:job_id => session['combine_job_id'])
 	  @doc_path = File.join(Rails.root, 'public', 'system', 'uploads')
@@ -131,6 +135,10 @@ class HomeController < ApplicationController
 	end
 	
 	def split
+	  @title = "Split PDF file online easily for free - pdfPi.com"
+	  @description = "Split large PDF files online with 3 easy steps, 1.) upload 2.) specify split ranges 3.) split. Processing takes only a few seconds."
+	  @keywords = %w(split PDF documents online free)
+	  
 	  session['split_job_id'] ||= get_job_id
 	  @upload = Upload.where(:job_id => session['split_job_id']).order('updated_at desc').first
 	  Job.create(:session_id => session['split_job_id'], :job_type => "split", :source_ip => request.remote_ip, :status => 'in progress') if not Job.find_by_session_id(session['split_job_id'])
@@ -249,6 +257,10 @@ class HomeController < ApplicationController
 	end
 	
 	def stamp
+	  @title = "Stamp PDF file online easily for free - pdfPi.com"
+	  @description = "Give your PDF documents a stamp or watermark on every page with 3 easy steps, 1.) upload 2.) specify your stamp 3.) Stamp. Processing takes only a few seconds."
+	  @keywords = %w(Stamp PDF documents file online free)
+	  
 	  @fonts = [
 	    "Arial",
 	    "Calibri",

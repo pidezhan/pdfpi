@@ -56,6 +56,7 @@ $(document).ready(function(){
 
 <div>
 <%= form_tag deliver_split_url, :id => 'form_ranges' do -%>
+	<div class="input-error" id="error_range"></div>
 	<% (1..10).each do |n| %>
 	<div class="row" id="split_<%= n %>">
 		<div class="span1">Split <%= n %>: </div>
@@ -80,3 +81,53 @@ $(document).ready(function(){
 	</button>
 <% end -%>
 </div>
+
+<script>
+$(function(){
+
+	function isValidRange() {
+		var from = $('#range1_from').val();
+		var to = $('#range1_to').val();
+	  var regex = /^\d+$/;
+	  return regex.test(from) && regex.test(to) && (parseInt(from) <= parseInt(to));
+	};
+	
+	$('#range1_from').keyup(function(){
+		$('#range1_to').val($(this).val());
+	});
+	
+	$('#range1_to').change(function(){
+		if(!isValidRange()){
+			$('#error_range').text('Please provide a valid range');
+		}
+		else {
+			$('#error_range').text('');
+		}
+	});
+	
+	function split() {
+		var form = $('#form_ranges');
+		var submitBtn = $('#start');
+		
+		submitBtn.addClass('disable');
+		form.submit(function(){
+			if (isValidRange()) {
+				submitBtn.removeClass('disable');
+			}
+			
+			if (submitBtn.hasClass('disable')) {
+				$('#error_range').text('Please provide a valid range');
+				return false;
+			}
+			else {
+				$('#error_range').text('');
+				return true;
+			}
+		});
+	}
+	
+	split();
+	
+});
+	
+</script>
