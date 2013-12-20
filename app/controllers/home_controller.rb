@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+  
+  layout "test", only: 'test'
+  
 	def index
 		@doc_path = File.join(Rails.root, 'public', 'pdf')
 		

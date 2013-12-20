@@ -11,6 +11,8 @@ rake db:migrate
 
 rake db:migrate RAILS_ENV="production" 
 
+RAILS_ENV=production bundle exec rake assets:precompile
+
 psql pdfpi_pro -U pdfpi
 \d table_name
 \copy (Select * From uploads) To '/home/deployer/db/uploads.csv' With CSV Header
