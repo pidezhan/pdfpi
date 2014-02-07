@@ -83,7 +83,7 @@ class HomeController < ApplicationController
   	    command = "java -jar #{pdfbox_jar} PDFMerger #{file_list} #{File.join( @download_path, file_name)}"
         system command
   	    
-  	    # Rails.logger.debug("command: #{command.inspect}")
+  	    Rails.logger.debug("command: #{command.inspect}")
         
   	    @download_link = File.join('system', 'downloads', session['combine_job_id'], file_name)
 

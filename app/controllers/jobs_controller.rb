@@ -14,12 +14,14 @@ class JobsController < ApplicationController
     if not @job
       redirect_to :action => 'invalid'
       return
-    #elsif @job.expiry_date and @job.expiry_date < Time.now
-    #  redirect_to :action => 'expired'
-    #  return
+    elsif @job.expiry_date and @job.expiry_date < Time.now
+      redirect_to :action => 'expired'
+      return
     elsif @job.download_path and not File.exist?(@job.download_path)
       FeedbackMailer.auto_report(@job.id).deliver
       redirect_to :action => :p_error
+    else
+      redirect_to :action => 'invalid'
     end
   end
   
@@ -34,13 +36,13 @@ class JobsController < ApplicationController
     if not @job
       redirect_to :action => 'invalid'
       return
-    #elsif @job.expiry_date and @job.expiry_date < Time.now
-    #  redirect_to :action => 'expired'
-    #  return
     elsif @job.download_path and File.exist?(@job.download_path)
       Download.create(:job_id => @job.id, :source_ip => request.remote_ip)
       content_type = (@job.job_type == 'split' ? 'application/zip' : 'application/pdf')
       send_file @job.download_path, :type => content_type, :filename => File.basename(@job.download_path)
+    elsif @job.expiry_date and @job.expiry_date < Time.now
+      redirect_to :action => 'expired'
+      return
     else #error handling
       FeedbackMailer.auto_report(@job.id).deliver
       redirect_to :action => :p_error

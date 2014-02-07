@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     if Rails.env.production?
       "/home/deployer/pdfbox/pdfbox-app-1.8.2.jar"
     else
-      "/tmp/pdfbox/pdfbox-app-1.8.2.jar"
+      "/Users/yilin/pdfbox/pdfbox-app-1.8.2.jar"
     end
   end
   
