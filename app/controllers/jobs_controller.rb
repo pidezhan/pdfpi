@@ -20,8 +20,8 @@ class JobsController < ApplicationController
     elsif @job.download_path and not File.exist?(@job.download_path)
       FeedbackMailer.auto_report(@job.id).deliver
       redirect_to :action => :p_error
-    else
-      redirect_to :action => 'invalid'
+    #else
+    #  redirect_to :action => 'invalid'
     end
   end
   
@@ -65,7 +65,7 @@ class JobsController < ApplicationController
       @email = params[:email]
       @status = ""
       if @job and @email
-        FeedbackMailer.send_link(download_job_url(@job.session_id), @email).deliver
+        FeedbackMailer.send_link(download_job_url(@job.session_id), @email, @job.expiry_date).deliver
         @status = "OK"
       else
         @status = "ERROR"

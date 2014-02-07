@@ -22,8 +22,9 @@ class FeedbackMailer < ActionMailer::Base
     mail to: "pdfpi.com@gmail.com", subject: "Auto issue report from pdfpi.com"
   end
   
-  def send_link(link, email)
+  def send_link(link, email, expiry_date)
     @link = link
+    @expiry_date = expiry_date
     
     mail to: email, subject: "Your download link from pdfPi.com"
   end
