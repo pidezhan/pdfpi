@@ -1,4 +1,7 @@
 Pdfpi::Application.routes.draw do
+  get "intel/index", :as => "intel"
+  match 'intel' => 'intel#index'
+
   get "jobs/index"
 
   get "jobs/new"

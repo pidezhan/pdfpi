@@ -170,7 +170,7 @@ class HomeController < ApplicationController
 	      end
 	      
 	      @download_folder = File.join(Rails.root, 'public', 'system', 'downloads', session['split_job_id'])
-	      download_file_name = "pdfPi.com_PDF_splits.zip"
+	      download_file_name = "pdfPi.com_PDF_splits_#{@upload.upload_file_name}.zip"
   	    @download_link = File.join('system', 'downloads', session['split_job_id'], download_file_name)
         # create folder
   	    require 'fileutils'

@@ -1,0 +1,44 @@
+
+<div id="num_of_jobs" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<script>
+$(function () {
+        $('#num_of_jobs').highcharts({
+            title: {
+                text: 'Daily number of jobs',
+                x: -20 //center
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Success',
+                data: <%= @job_OK_count_data.inspect %>,
+								pointStart: <%= @start_time.at_midnight.to_i * 1000 %>,
+								pointInterval: 24 * 3600 * 1000 // one day
+            }, {
+                name: 'Error',
+                data: <%= @job_error_count_data.inspect %>,
+								pointStart: <%= @start_time.at_midnight.to_i * 1000 %>,
+								pointInterval: 24 * 3600 * 1000 // one day
+            }]
+        });
+    });
+    
+
+</script>

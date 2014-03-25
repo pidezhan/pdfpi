@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> <%= @title || "Combine and Split PDF documents easily online for free - pdfPi.com" %> </title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="container">
+		
+		<div class="row">
+			<div class="span2"> 
+				<%= link_to root_url do %>
+					<%= image_tag "logo.png" %>
+				<% end %> </div>
+		</div>
+	</div>
+<div id="nav">
+	<div class="container">
+		<ul>
+			
+			<li><%= link_to root_url, :class => (controller_name == "home" and action_name == "index" ? "active" : "") do %>
+				 Home
+				<% end %>
+
+    	<li><%= link_to combine_path, :class => (controller_name == "home" and action_name == "combine" ? "active" : "") do %> 
+					 Combine PDFs
+					<% end %>
+			</li>
+    	<li><%= link_to split_path, :class => (controller_name == "home" and action_name == "split" ? "active" : "") do %>
+					 Split PDF
+	 			<% end %>
+			</li>
+			</li>
+			<li><%= link_to stamp_path, :class => (controller_name == "home" and action_name == "stamp" ? "active" : "") do %> 
+					 Stamp PDF
+					<% end %>
+			</li>
+			<li><%= link_to why_us_path, :class => (controller_name == "home" and action_name == "why_us" ? "active" : "") do %>
+					 Why us?
+	 			<% end %>
+			</li>
+			<li><%= link_to feedback_path, :class => (controller_name == "feedback" ? "active" : "") do %>
+					 Feedback
+	 			<% end %>
+			</li>
+			<li><a href="http://pdfpi.blogspot.sg" target="_blank"> Blog </a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="container">
+	<% flash.each do |name, msg| %>
+		<div class="alert alert-<%= name == :notice ? 'info' : name %>">
+			<a class="close" data-dismiss="alert">x</a>
+			<%= raw msg %>
+		</div>
+	<% end %>
+	<%= yield %>
+</div>
+
+<div id="footer">
+	<div class="container">
+		<%= link_to root_url do %>
+			 pdfPi.com - your trusted online pdf processing site
+		<% end %> |
+		<%= link_to stamp_path do %> 
+					 PDF online stamping tool
+					<% end %> |
+  	<%= link_to combine_path do %> 
+				 combine / merge pdf online
+				<% end %> |
+  	<%= link_to split_path do %>
+				 online pdf splitter
+ 			<% end %> |
+		<%= link_to why_us_path do %>
+				 why pdfpi.com
+ 			<% end %>
+		|
+	&copy; <%= Time.now.year %> pdfPi
+	</div>
+</div>
+</body>
+</html>
