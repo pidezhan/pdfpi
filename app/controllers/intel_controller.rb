@@ -2,7 +2,7 @@ class IntelController < ApplicationController
   layout "intel"
   
   def index
-    @start_time = 1.year.ago
+    @start_time = 6.months.ago
     
     jobs_OK_by_day = Job.where(:created_at => @start_time.beginning_of_day..Time.zone.now.end_of_day, :status => 'OK').
                         group("date(created_at)").

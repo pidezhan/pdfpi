@@ -10,8 +10,12 @@ $(function () {
                 text: 'Daily number of jobs',
                 x: -20 //center
             },
+						chart: {
+						    zoomType: 'x'
+						},
             xAxis: {
-                type: 'datetime'
+                type: 'datetime',
+								maxZoom: 48 * 3600 * 1000
             },
             yAxis: {
                 plotLines: [{
