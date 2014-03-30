@@ -40,6 +40,23 @@ $(function () {
                 data: <%= @job_error_count_data.inspect %>,
 								pointStart: <%= @start_time.at_midnight.to_i * 1000 %>,
 								pointInterval: 24 * 3600 * 1000 // one day
+            },
+						{
+                name: 'Split',
+                data: <%= @job_split_count_data.inspect %>,
+								pointStart: <%= @start_time.at_midnight.to_i * 1000 %>,
+								pointInterval: 24 * 3600 * 1000 // one day
+            }, {
+                name: 'Combine',
+                data: <%= @job_combine_count_data.inspect %>,
+								pointStart: <%= @start_time.at_midnight.to_i * 1000 %>,
+								pointInterval: 24 * 3600 * 1000 // one day
+            },
+						{
+                name: 'Stamp',
+                data: <%= @job_stamp_count_data.inspect %>,
+								pointStart: <%= @start_time.at_midnight.to_i * 1000 %>,
+								pointInterval: 24 * 3600 * 1000 // one day
             }]
         });
     });
