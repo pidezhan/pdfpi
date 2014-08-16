@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   helper_method :download_link_prefix
   helper_method :get_title
   helper_method :pdfbox_jar
+  helper_method :max_file_size_combine
+  
+  def max_file_size_combine
+    # in MB
+    10
+  end
   
   def get_job_id
     o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten

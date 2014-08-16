@@ -22,7 +22,7 @@
 		<td><%= @job.status %></td>
 	</tr>
 </table>
-<%#= link_to "Download", download_job_url(@job.session_id), :class=> "btn btn-primary"%>
+<%= link_to "Download", download_job_url(@job.session_id), :class=> "btn btn-primary"%>
 
 <br><br><br>
 <h4>Uploads </h4>
@@ -32,6 +32,7 @@
 		<td> File Name </td>
 		<td>File size</td>
 		<td>Uploaded at</td>
+		<td></td>
 	</tr>
 <% @uploads.each do |upload| %>
 	<tr>
@@ -39,6 +40,7 @@
 		<td> <%= upload.upload_file_name %></td>
 		<td> <%= number_to_human_size(upload.upload_file_size) %></td>
 		<td> <%= upload.created_at.localtime %></td>
+		<td> <%= link_to "Download", File.join(download_link_prefix, 'system', 'uploads', upload.id.to_s, 'original', upload.upload_file_name), :class=> "btn btn-primary"%></td>
 	</tr>
 <% end %>
 </table>

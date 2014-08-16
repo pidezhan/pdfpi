@@ -5,7 +5,7 @@ meta 	:title => "Combine/Merge PDF files - pdfPi.com",
 %>
 
 <h2> Combine PDF files </h2>
-<p> Combine/merge multiple PDF files into one, with each file up to 100 MB and up to 10 files at a time. Drag & drop to upload and reorder before combining. </p>
+<p> Combine/merge multiple PDF files into one, with each file up to <b> <%= max_file_size_combine %> MB </b> and up to 10 files at a time. <br><span class="label label-primary">Tip</span> Drag & drop to upload and reorder before combining. </p>
 <script>
 
 $(document).ready(function(){
@@ -28,6 +28,8 @@ $(document).ready(function(){
 				url: '/home/sort'})
 		}
 	});
+	$('#new_upload').data('fileupload').options.maxFileSize = 10000000;
+	
 });
 </script>
 
@@ -43,8 +45,8 @@ $(document).ready(function(){
 </div>
 {% } else { %}
 <div class="upload row">
-  <div class="span4"> {%=o.name%} ({%=o.size_with_format%}) </div>
-  <div class="span6 progress"><div class="bar" style="width: 0%;"></div></div>
+  <div class="col-md-4"> {%=o.name%} ({%=o.size_with_format%}) </div>
+  <div class="col-md-6 progress"><div class="bar" style="width: 0%;"></div></div>
 </div>
 {% } %}
 

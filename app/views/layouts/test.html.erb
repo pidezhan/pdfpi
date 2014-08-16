@@ -1,123 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
   <%= metamagic :title => get_title, :description => "Combine, merge, split and stamp PDF documents online for free with pdfPi.com. No installation, no registration. Very fast. Large file size limit up to 100 MB. ", :keywords => %w(combine merge split stamp pdf file free online pdfpi.com) %>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-	<script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-		var pluginUrl = 
-		 '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
-		_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
-	  _gaq.push(['_setAccount', 'UA-37331499-1']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="container">
-		
+	<div class="container-fluid">
+		<nav class="navbar navbar-inverse" role="navigation">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#">pdfPi.com</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li class="active"><a href="#">Link</a></li>
+		        <li><a href="#">Link</a></li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+		          <ul class="dropdown-menu" role="menu">
+		            <li><a href="#">Action</a></li>
+		            <li><a href="#">Another action</a></li>
+		            <li><a href="#">Something else here</a></li>
+		            <li class="divider"></li>
+		            <li><a href="#">Separated link</a></li>
+		            <li class="divider"></li>
+		            <li><a href="#">One more separated link</a></li>
+		          </ul>
+		        </li>
+		      </ul>
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="#">Link</a></li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+		          <ul class="dropdown-menu" role="menu">
+		            <li><a href="#">Action</a></li>
+		            <li><a href="#">Another action</a></li>
+		            <li><a href="#">Something else here</a></li>
+		            <li class="divider"></li>
+		            <li><a href="#">Separated link</a></li>
+		          </ul>
+		        </li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
 		<div class="row">
-			<div class="span2"> 
-				<%= link_to root_url do %>
-					<%= image_tag "logo.png" %>
-				<% end %> </div>
-			<div class="span3 offset2">
-				<br/>
-				<%= link_to "https://chrome.google.com/webstore/detail/pdfpi/mcbaeddpndondhghkhdppebndnbcepdo", :target => "blank" do %>
-					<%= image_tag 'chrome_store.png' %>
-				<% end %>
+			<div class="col-md-4"> 
+				Pdfpi.com
 			</div>
-			<div class="span2 offset2" style="padding: 10px 0px">
-				<div id="fb-root"></div>
-				<div class="fb-like" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true" data-font="verdana"></div>
+			<div class="col-md-4">
+				Facebook counter
 			</div>
-			<div class="span1" style="padding: 10px 0px">
-				<div class="g-plusone" data-annotation="none" data-width="300"></div>
+			<div class="col-md-4">
+				Google Plus
 			</div>
 		</div>
-			<!-- Place this tag where you want the +1 button to render. -->
 	</div>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-	<!-- Place this tag after the last +1 button tag. -->
-	<script type="text/javascript">
-	  (function() {
-	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-	    po.src = 'https://apis.google.com/js/plusone.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-	  })();
-	</script>
-</div>
-
-<!-- 
-<div class="navbar container">
-  <div class="navbar-inner">
-    <div class="container">
-      .btn-navbar is used as the toggle for collapsed navbar content 
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-
-      Everything you want hidden at 940px or less, place within here 
-      <div class="nav-collapse collapse">
-         .nav, .navbar-search, .navbar-form, etc 
-        <ul class="nav">
-        	<li><%= link_to "Home", root_url %></li>
-        	<li><%= link_to "Combine PDFs", combine_path %> </li>
-        	<li><%= link_to "Split PDF", split_path %> </li>
-        	
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
--->
-<div class="container">
-	<% flash.each do |name, msg| %>
-		<div class="alert alert-<%= name == :notice ? 'info' : name %>">
-			<a class="close" data-dismiss="alert">x</a>
-			<%= raw msg %>
-		</div>
-	<% end %>
-	<%= yield %>
-</div>
-
-<div id="footer">
-	<div class="container">
-		<%= link_to root_url do %>
-			 pdfPi.com - your trusted online pdf processing site
-		<% end %> |
-		<%= link_to stamp_path do %> 
-					 PDF online stamping tool
-					<% end %> |
-  	<%= link_to combine_path do %> 
-				 combine / merge pdf online
-				<% end %> |
-  	<%= link_to split_path do %>
-				 online pdf splitter
- 			<% end %> |
-		<%= link_to why_us_path do %>
-				 why pdfpi.com
- 			<% end %>
-		|
-	&copy; <%= Time.now.year %> pdfPi
-	</div>
-</div>
 </body>
 </html>

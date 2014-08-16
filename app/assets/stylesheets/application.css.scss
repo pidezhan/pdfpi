@@ -15,8 +15,6 @@
  *= require_tree .
  */
 
-@import 'bootstrap';
-
 #opacity .ui-slider-range { background: #333; }
 #opacity .ui-slider-handle { border-color: #333;}
 #size .ui-slider-range { background: #333; }
@@ -39,8 +37,6 @@ background: -ms-linear-gradient(top,  #7d7e7d 0%,#0e0e0e 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #7d7e7d 0%,#0e0e0e 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
 
-
-	
 	margin-bottom: 10px;
 	ul{
 		list-style-type:none;

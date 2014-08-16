@@ -4,7 +4,7 @@ meta 	:title => "Split PDF files into smaller ones - pdfPi.com",
      :keywords => %w(split large PDF documents online free)
 %>
 <h2> Split PDF </h2>
-<p> Split large PDF into multiple smaller ones, up to 10 splits. Large file size limit up to 100 MB. </p> 
+<p> Split large PDF into multiple smaller ones, up to 10 splits. Large file size limit up to <b> 100 MB </b>. </p> 
 <br>
 <script>
 
@@ -59,16 +59,16 @@ $(document).ready(function(){
 	<div class="input-error" id="error_range"></div>
 	<% (1..10).each do |n| %>
 	<div class="row" id="split_<%= n %>">
-		<div class="span1">Split <%= n %>: </div>
-		<div class="span2">
-		 From <%= number_field_tag "range#{n}_from", nil, :min => 1, :max => 999, :class => "input-mini" %> 
+		<div class="col-md-1">Split <%= n %>: </div>
+		<div class="col-md-1">
+		 From page # <%= number_field_tag "range#{n}_from", nil, :min => 1, :max => 999, :class => "form-control input-mini", :style => "height:25px"%> 
 		</div>
-		<div class="span2">
-		To <%= number_field_tag "range#{n}_to", nil, :in => 1...999, :class => "input-mini" %>
+		<div class="col-md-1">
+			To page # <%= number_field_tag "range#{n}_to", nil, :in => 1...999, :class => "form-control input-mini", :style => "height:25px" %> 
 		</div>
-		<div class="span2">
+		<div class="col-md-2">
 			<button class="btn btn-small btn-primary" type="button" id="add_range<%= n %>">
-			  <i class="icon-plus icon-white"></i>
+			  <span class="glyphicon glyphicon-plus"></span>
 			  <span>Add a split</span>
 			</button>
 		</div>

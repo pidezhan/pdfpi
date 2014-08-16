@@ -4,11 +4,12 @@ class Job < ActiveRecord::Base
   has_many :downloads
   
   def self.keep_house
-    # clean up uploads more than 1 week old
+    # clean up uploads and downloads more than 2 days old
     
-    too_old = 1.week.ago
+    upload_too_old = 2.days.ago
+    download_too_old = 1.week.ago
     
-    @uploads = Upload.where('created_at < ?', too_old)
+    @uploads = Upload.where('created_at < ?', upload_too_old)
     @uploads.each do |upload|
       file_path = File.join(Rails.root, 'public', 'system', 'uploads', upload.id.to_s)
       `rm -rf #{file_path}`
@@ -16,7 +17,7 @@ class Job < ActiveRecord::Base
       puts "#{file_path} removed"
     end
     
-    @jobs = Job.where('created_at < ?', too_old)
+    @jobs = Job.where('created_at < ?', download_too_old)
     @jobs.each do |job|
       file_path = File.join(Rails.root, 'public', 'system', 'downloads', job.session_id)
       `rm -rf #{file_path}`
