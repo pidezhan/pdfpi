@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   
   def max_file_size_combine
     # in MB
-    10
+    20
   end
   
   def get_job_id

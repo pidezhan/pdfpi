@@ -60,11 +60,11 @@ $(document).ready(function(){
 	<% (1..10).each do |n| %>
 	<div class="row" id="split_<%= n %>">
 		<div class="col-md-1">Split <%= n %>: </div>
-		<div class="col-md-1">
-		 From page # <%= number_field_tag "range#{n}_from", nil, :min => 1, :max => 999, :class => "form-control input-mini", :style => "height:25px"%> 
+		<div class="col-md-2">
+		 From page # <%= number_field_tag "range#{n}_from", nil, :min => 1, :max => 999, :class => "form-control input-mini", :style => "height:34px"%> 
 		</div>
-		<div class="col-md-1">
-			To page # <%= number_field_tag "range#{n}_to", nil, :in => 1...999, :class => "form-control input-mini", :style => "height:25px" %> 
+		<div class="col-md-2">
+			To page # <%= number_field_tag "range#{n}_to", nil, :in => 1...999, :class => "form-control input-mini", :style => "height:34px" %> 
 		</div>
 		<div class="col-md-2">
 			<button class="btn btn-small btn-primary" type="button" id="add_range<%= n %>">
