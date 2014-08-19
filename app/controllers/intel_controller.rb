@@ -23,7 +23,7 @@ class IntelController < ApplicationController
         end
         
     # split jobs data
-    jobs_split_by_day = Job.where(:created_at => @start_time.beginning_of_day..Time.zone.now.end_of_day, :job_type => 'split').
+    jobs_split_by_day = Job.where(:created_at => @start_time.beginning_of_day..Time.zone.now.end_of_day, :job_type => 'split', :status => ['OK', 'ERROR']).
                         group("date(created_at)").
                         select("date(created_at) as created_at, count(*) as job_count")
     @job_split_count_data = (@start_time.to_date..Date.today).map do |date|
@@ -32,7 +32,7 @@ class IntelController < ApplicationController
         end
         
     # combine jobs data
-    jobs_combine_by_day = Job.where(:created_at => @start_time.beginning_of_day..Time.zone.now.end_of_day, :job_type => 'combine').
+    jobs_combine_by_day = Job.where(:created_at => @start_time.beginning_of_day..Time.zone.now.end_of_day, :job_type => 'combine', :status => ['OK', 'ERROR']).
                         group("date(created_at)").
                         select("date(created_at) as created_at, count(*) as job_count")
     @job_combine_count_data = (@start_time.to_date..Date.today).map do |date|
@@ -41,7 +41,7 @@ class IntelController < ApplicationController
         end
   
     # stamp jobs data
-    jobs_stamp_by_day = Job.where(:created_at => @start_time.beginning_of_day..Time.zone.now.end_of_day, :job_type => 'stamp').
+    jobs_stamp_by_day = Job.where(:created_at => @start_time.beginning_of_day..Time.zone.now.end_of_day, :job_type => 'stamp', :status => ['OK', 'ERROR']).
                         group("date(created_at)").
                         select("date(created_at) as created_at, count(*) as job_count")
     @job_stamp_count_data = (@start_time.to_date..Date.today).map do |date|
