@@ -43,7 +43,7 @@ $(document).ready(function(){
 
 <%= form_for Upload.new do |f| %>
 	<span class="btn btn-success fileinput-button">
-    <i class="icon-upload icon-white"></i>
+    <span class="glyphicon glyphicon-upload"></span> 
     <span>Select file...</span>
     <%= f.file_field :upload, :accept => 'application/pdf' %>
   </span>
@@ -76,11 +76,12 @@ $(document).ready(function(){
 	<% end %>
 	<br>
 	<button type="submit" class="btn btn-large btn-primary start" id="start" >
-	  <i class="icon-upload icon-white"></i>
-	  <span>Split</span>
+	  <span class="glyphicon glyphicon-resize-full"></span> 
+	  <span>Split now </span>
 	</button>
 <% end -%>
 </div>
+<br>
 
 <script>
 $(function(){

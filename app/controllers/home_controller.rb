@@ -22,6 +22,9 @@ class HomeController < ApplicationController
 	
 	def why_us
 	end
+
+  def faq
+  end
 	
 	def combine
 	  @title = "Combine or Merge PDF files online easily for free - pdfPi.com"
@@ -101,7 +104,7 @@ class HomeController < ApplicationController
   	    if @job
   	      @job.download_path = @download_path + "/" + file_name
   	      @job.download_link = @download_link
-  	      @job.expiry_date = Time.now + 7.days
+  	      @job.expiry_date = Time.now + get_download_valid_duration
   	      @job.status = (File.exist?(@job.download_path) ? "OK" : "ERROR" )
   	      @job.save
   	    end
@@ -191,11 +194,11 @@ class HomeController < ApplicationController
 =end
           # action!!
     	    command_split = "java -jar #{pdfbox_jar} PDFSplit -startPage #{range[:from]} -endPage #{range[:to]} #{file_path}"
-    	    Rails.logger.debug("command split: #{command_split.inspect}")
+    	    #Rails.logger.debug("command split: #{command_split.inspect}")
           system command_split
           split_file_name = File.join(@download_folder, "/pdfpi.com.split" + n.to_s + ".pdf")
           command_mv = "mv #{file_path[0..file_path.length-5] + "-0.pdf"} #{split_file_name}"
-          Rails.logger.debug("command mv: #{command_mv.inspect}")
+          #Rails.logger.debug("command mv: #{command_mv.inspect}")
           system command_mv
           input_filenames << split_file_name
           n += 1
@@ -236,7 +239,7 @@ class HomeController < ApplicationController
   	    if @job
   	      @job.download_path = zipfile_name
   	      @job.download_link = @download_link
-  	      @job.expiry_date = Time.now + 7.days
+  	      @job.expiry_date = Time.now + get_download_valid_duration
   	      @job.status = (File.exist?(@job.download_path) ? "OK" : "ERROR" )
   	      @job.save
   	    end
@@ -325,7 +328,7 @@ class HomeController < ApplicationController
   	    if @job
   	      @job.download_path = File.join( @download_folder, download_file_name)
   	      @job.download_link = @download_link
-  	      @job.expiry_date = Time.now + 7.days
+  	      @job.expiry_date = Time.now + get_download_valid_duration
   	      @job.status = (File.exist?(@job.download_path) ? "OK" : "ERROR" )
   	      @job.save
   	    end

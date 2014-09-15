@@ -7,7 +7,7 @@ class Job < ActiveRecord::Base
     # clean up uploads and downloads more than 2 days old
     
     upload_too_old = 2.days.ago
-    download_too_old = 1.week.ago
+    download_too_old = 2.days.ago
     
     @uploads = Upload.where('created_at < ?', upload_too_old)
     @uploads.each do |upload|

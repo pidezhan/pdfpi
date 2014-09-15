@@ -75,24 +75,24 @@
 				 Home
 				<% end %>
 
-    	<li><%= link_to combine_path, :class => (controller_name == "home" and action_name == "combine" ? "active" : "") do %> 
-					 Combine PDFs
+    	<li><%= link_to '/combine', :class => (controller_name == "home" and action_name == "combine" ? "active" : "") do %> 
+					 Combine
 					<% end %>
 			</li>
-    	<li><%= link_to split_path, :class => (controller_name == "home" and action_name == "split" ? "active" : "") do %>
-					 Split PDF
+    	<li><%= link_to '/split', :class => (controller_name == "home" and action_name == "split" ? "active" : "") do %>
+					 Split
 	 			<% end %>
 			</li>
 			</li>
-			<li><%= link_to stamp_path, :class => (controller_name == "home" and action_name == "stamp" ? "active" : "") do %> 
-					 Stamp PDF
+			<li><%= link_to '/stamp', :class => (controller_name == "home" and action_name == "stamp" ? "active" : "") do %> 
+					 Stamp
 					<% end %>
 			</li>
-			<li><%= link_to why_us_path, :class => (controller_name == "home" and action_name == "why_us" ? "active" : "") do %>
+			<li><%= link_to '/why_us', :class => (controller_name == "home" and action_name == "why_us" ? "active" : "") do %>
 					 Why us?
 	 			<% end %>
 			</li>
-			<li><%= link_to feedback_path, :class => (controller_name == "feedback" ? "active" : "") do %>
+			<li><%= link_to '/feedback', :class => (controller_name == "feedback" ? "active" : "") do %>
 					 Feedback
 	 			<% end %>
 			</li>

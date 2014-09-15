@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     # in MB
     20
   end
+
+  def get_download_valid_duration
+    2.days
+  end
   
   def get_job_id
     o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten

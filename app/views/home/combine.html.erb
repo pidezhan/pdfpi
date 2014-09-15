@@ -5,7 +5,7 @@ meta 	:title => "Combine/Merge PDF files - pdfPi.com",
 %>
 
 <h2> Combine PDF files </h2>
-<p> Combine/merge multiple PDF files into one, with each file up to <b> <%= max_file_size_combine %> MB </b> and up to 10 files at a time. <br><span class="label label-primary">Tip</span> Drag & drop to upload and reorder before combining. </p>
+<p> Combine/merge multiple PDF files into one, with each file up to <b> <%= max_file_size_combine %> MB </b> and up to 10 files at a time. </p>
 <script>
 
 $(document).ready(function(){
@@ -54,22 +54,25 @@ $(document).ready(function(){
 
 <%= form_for Upload.new do |f| %>
 	<span class="btn btn-success fileinput-button">
-    <i class="icon-plus icon-white"></i>
-    <span>Add files...</span>
+    <span class="glyphicon glyphicon-plus"></span> <span>Add files...</span>
     <%= f.file_field :upload, :multiple => true, :accept => 'application/pdf', :name => "upload[upload]" %>
   </span>
 	<%= hidden_field_tag "job_id", session['combine_job_id'] %>
 
 <% end %>
 <br><br>
+<div>
+<span class="label label-success">Tip</span> Drag the handle in front of each upload to reorder if necessary before combining. 
+</div>
 <div id="uploading"> </div>
 <br>
 <div>
 <%= form_tag deliver_url do -%>
 <%= hidden_field_tag "job", 'combine' %>
 <button type="submit" class="btn btn-large btn-primary start" id="start">
-  <i class="icon-folder-close icon-white"></i>
+  <span class="glyphicon glyphicon-book"></span>
   <span>Combine into one PDF</span>
 </button>
 <% end -%>
 </div>
+<br>

@@ -25,7 +25,12 @@
     background: green;
 }
 
-.handle:hover{cursor: move;}
+.handle {
+	text-align: right;
+}
+.handle:hover{
+	cursor: move;
+}
 
 #nav {
 background: #7d7e7d; /* Old browsers */
