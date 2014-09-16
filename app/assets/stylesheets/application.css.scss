@@ -139,12 +139,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', end
 	background-color: #efefef;
 	padding: 15px;
 	border-top: solid 1px #ccc;
+	margin-top: 20px;
 }
 
 //-------------------------------------------------------------------------------
 //   Pagination fix for will_paginate and bootstrap
 //-------------------------------------------------------------------------------
-
+/*
 .pagination {
   span.disabled {
     color: #aaa !important;
@@ -166,3 +167,4 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', end
 .input-error {
 	color: #f00;
 }
+*/

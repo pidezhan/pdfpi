@@ -12,26 +12,29 @@
 <h2>Your feedback is highly valued and appreciated by us!</h2>
 <p> Please tell us what you think or what problems you have encountered</p>
 <%= form_tag "/feedback/index", :id => "form_feedback", :class => "form-horizontal" do %>
-	<div class="control-group">
-		<%= label_tag :name, "Name", :class => "control-label" %>
-		<div class="controls">
-		<%= text_field_tag :name, nil, :placeholder => "e.g. Michael" %>
+	<div class="form-group">
+		<%= label_tag :name, "Name", :class => "col-md-2 control-label" %>
+		<div class="col-md-5">
+		<%= text_field_tag :name, nil, :placeholder => "e.g. Michael", class: "form-control" %>
 		</div>
 	</div>
-	<div class="control-group">
-		<%= label_tag :email, "Email", :class => "control-label" %>
-		<div class="controls">
-		<%= text_field_tag :email, nil, :placeholder => "e.g. michael@gmail.com" %>
+	<div class="form-group">
+		<%= label_tag :email, "Email", :class => "col-md-2 control-label" %>
+		<div class="col-md-5">
+		<%= text_field_tag :email, nil, :placeholder => "e.g. michael@gmail.com", class: "form-control" %>
+		</div>
+		<div class="col-md-5">
+			<span class="help-block">We respect your privacy. We will NEVER sell, rent or share your email address.</span>
 		</div>
 	</div>
-	<div class="control-group">
-		<%= label_tag :msg, "Message", :class => "control-label" %>
-		<div class="controls">
-		<%= text_area_tag :msg, nil, :rows => 10, :style => 'width:500px', :placeholder => "e.g. I had a problem with the stamping function. This is what happened...." %>
+	<div class="form-group">
+		<%= label_tag :msg, "Message", :class => "col-md-2 control-label" %>
+		<div class="col-md-5">
+		<%= text_area_tag :msg, nil, :rows => 10, :placeholder => "e.g. I had a problem with the stamping function. This is what happened....", class: "form-control" %>
 		</div>
 	</div>
-	<div class="control-group">
-		<div class="controls">
+	<div class="form-group">
+		<div class="col-md-offset-2 col-md-5">
 			<%= button_tag "Send Feedback", :type => "submit", :class => "btn btn-large btn-primary", data: {disable_with: "Sending Feedback..."} %>
 		</div>
 	</div>

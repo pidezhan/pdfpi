@@ -96,8 +96,9 @@
 					 Feedback
 	 			<% end %>
 			</li>
-			<li><a href="http://pdfpi.blogspot.sg" target="_blank"> Blog </a>
-			</li>
+			<li><%= link_to '/faq', :class => (controller_name == "home" and action_name == "faq" ? "active" : "") do %>
+					 FAQs
+	 			<% end %></li>
 		</ul>
 	</div>
 </div>
