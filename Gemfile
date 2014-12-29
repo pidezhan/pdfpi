@@ -49,3 +49,5 @@ gem 'metamagic'
 # To use debugger
 # gem 'debugger'
 gem 'whenever', require: false
+
+gem "recaptcha", :require => "recaptcha/rails"
