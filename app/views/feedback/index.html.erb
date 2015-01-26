@@ -60,7 +60,7 @@ $(function(){
 		var email = $('#email').val();
 		var submitBtn = $('#btn-feedback-submit');
 		if(email.length > 0 && !isEmail(email)){
-			$('#error_email').text('Please provide an valid email address');
+			$('#error_email').text('Please provide a valid email address');
 			submitBtn.prop("disabled", true);
 		}
 		else {

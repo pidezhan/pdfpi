@@ -6,6 +6,7 @@
   <%#= metamagic :title => get_title, :description => "Combine, merge, split and stamp PDF documents online for free with pdfPi.com. No installation, no registration. Very fast. Large file size limit up to 100 MB. ", :keywords => %w(combine merge split stamp pdf file free online pdfpi.com) %>
 	<meta content="<%= @description || "Combine, merge, split and stamp PDF documents online for free with pdfPi.com. No installation, no registration. Very fast. Large file size limit up to 100 MB. " %>" name="description" />
 	<meta content="<%= @keywords.nil? ? "combine, merge, split, stamp, pdf, file, free, online, pdfpi.com" : @keywords.join(", ") %>"  name="keywords" />
+	<meta name="google-translate-customization" content="6859f1ddd3a7b9a1-fad6af6c23a840cf-g4819faae8f57aa76-d"></meta>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -30,11 +31,11 @@
 	<div class="container-fluid">
 		
 		<div class="row">
-			<div class="col-md-4"> 
+			<div class="col-md-3"> 
 				<%= link_to root_url do %>
 					<%= image_tag "logo.png" %>
 				<% end %> </div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<br/>
 				<%= link_to "https://chrome.google.com/webstore/detail/pdfpi/mcbaeddpndondhghkhdppebndnbcepdo", :target => "blank" do %>
 					<%= image_tag 'chrome_store.png' %>
@@ -46,6 +47,13 @@
 			</div>
 			<div class="col-md-2" style="padding: 10px 0px">
 				<div class="g-plusone" data-annotation="none" data-width="300"></div>
+			</div>
+			<div class="col-md-3">
+				<div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-37331499-1'}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 			</div>
 		</div>
 			<!-- Place this tag where you want the +1 button to render. -->
