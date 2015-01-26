@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_download_valid_duration
-    2.days
+    1.day
   end
   
   def get_job_id

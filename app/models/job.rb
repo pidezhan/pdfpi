@@ -4,10 +4,10 @@ class Job < ActiveRecord::Base
   has_many :downloads
   
   def self.keep_house
-    # clean up uploads and downloads more than 2 days old
+    # clean up uploads and downloads more than 1 day old
     
-    upload_too_old = 2.days.ago
-    download_too_old = 2.days.ago
+    upload_too_old = 10.hours.ago
+    download_too_old = 1.day.ago
     
     @uploads = Upload.where('created_at < ?', upload_too_old).reorder('created_at desc').take(1000)
     @uploads.each do |upload|
